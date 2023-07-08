@@ -1,7 +1,7 @@
-const { Dog } = require('../../DataBases/db')
+const { Dog } = require("../../DataBases/db");
 
 const createDog = async (newDog) => {
-    await Dog.create(newDog)
-}
+  return await Dog.create(newDog);
+};
 
-module.exports = createDog
+module.exports = createDog;

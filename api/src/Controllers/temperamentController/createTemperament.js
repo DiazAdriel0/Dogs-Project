@@ -1,7 +1,7 @@
-const { Temperament } = require('./../../DataBases/db')
+const { Temperament } = require("./../../DataBases/db");
 
 const createTemperament = async (temperament) => {
-    await Temperament.findOrCreate({ where: { temperament } })
-}
+  await Temperament.findOrCreate({ where: { name: temperament } });
+};
 
-module.exports = createTemperament
+module.exports = createTemperament;

@@ -1,10 +1,13 @@
 import Card from '../card/card'
 import style from './cards.module.css'
 
-const Cards = () => {
+const Cards = props => {
+	const { dogs } = props
 	return (
 		<div className={style.containerCards}>
-			<Card />
+			{dogs.map(dog => (
+				<Card key={dog.id} dog={dog} />
+			))}
 		</div>
 	)
 }

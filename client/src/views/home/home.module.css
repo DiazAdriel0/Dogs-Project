@@ -1,0 +1,8 @@
+.containerHome {
+	display: flex;
+	flex-direction: column;
+}
+
+.temperaments {
+	color: #000;
+}
