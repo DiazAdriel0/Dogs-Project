@@ -16,20 +16,20 @@ const Home = () => {
 	const dispatch = useDispatch()
 
 	const [selectedTemperaments, setSelectedTemperaments] = useState([])
+	const [selectedOrder, setSelectedOrder] = useState('')
+	const [firstLoad, setFirstLoad] = useState(true)
 
 	const allTemperaments = useSelector(state => state.allTemperaments)
 	const allDogs = useSelector(state => state.allDogs)
-	const change = useSelector(state => state.change)
 
 	useEffect(() => {
-		if (!allDogs.length || !allTemperaments.length) {
-			dispatch(getAllDogs())
+		if (firstLoad) {
 			dispatch(getTemperaments())
+			dispatch(getAllDogs())
+			setFirstLoad(false)
 		}
-	}, [change])
-
-	useEffect(() => {
 		dispatch(filterByTemperament(selectedTemperaments))
+		dispatch(orderDogs(selectedOrder))
 	}, [selectedTemperaments])
 
 	const handleTemperamentChange = selected => {
@@ -39,14 +39,18 @@ const Home = () => {
 	const handleOrderChange = event => {
 		const { value } = event.target
 		dispatch(orderDogs(value))
+		setSelectedOrder(value)
 	}
 
 	return (
 		<div className={style.containerHome}>
 			<Nav />
 			<h1>Home</h1>
-			<select defaultValue='default' onChange={handleOrderChange}>
-				<option value='default' disabled>
+			<select
+				defaultValue={selectedOrder}
+				onChange={event => handleOrderChange(event)}
+			>
+				<option value='' disabled>
 					Order Dogs
 				</option>
 				<option value='A-Z'>A - Z</option>
