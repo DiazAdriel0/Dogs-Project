@@ -1,4 +1,3 @@
-/* eslint-disable no-case-declarations */
 import {
 	FILTER_BY_TEMPERAMENT,
 	GET_ALL_DOGS,
@@ -15,9 +14,6 @@ const initialState = {
 }
 
 const rootReducer = (state = initialState, { type, payload }) => {
-	/* let orderedAllDogs = []
-	let filteredDogs = [] */
-
 	switch (type) {
 		case GET_ALL_DOGS:
 			return {
@@ -33,7 +29,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
 			}
 
 		case FILTER_BY_TEMPERAMENT:
-			/* filteredDogs = filterByTemp(state.allDogsCopy, payload) */
 			return {
 				...state,
 				allDogs: filterByTemp(state.allDogsCopy, payload),
@@ -47,28 +42,24 @@ const rootReducer = (state = initialState, { type, payload }) => {
 					allDogs: ascendingOrder(state.allDogs, 'name'),
 					change: !state.change,
 				}
-				/* orderedAllDogs = ascendingOrder(state.allDogs, 'name') */
 			} else if (payload === 'Z-A') {
 				return {
 					...state,
 					allDogs: descendingOrder(state.allDogs, 'name'),
 					change: !state.change,
 				}
-				/* orderedAllDogs = descendingOrder(state.allDogs, 'name') */
 			} else if (payload === 'AscWeight') {
 				return {
 					...state,
 					allDogs: ascendingOrder(state.allDogs, 'weight'),
 					change: !state.change,
 				}
-				/* orderedAllDogs = ascendingOrder(state.allDogs, 'weight') */
 			} else if (payload === 'DescWeight') {
 				return {
 					...state,
 					allDogs: descendingOrder(state.allDogs, 'weight'),
 					change: !state.change,
 				}
-				/* orderedAllDogs = descendingOrder(state.allDogs, 'weight') */
 			}
 			return {
 				...state,

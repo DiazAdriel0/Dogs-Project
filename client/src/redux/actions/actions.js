@@ -45,15 +45,6 @@ export const getTemperaments = () => {
 	}
 }
 
-/* export const filterByTemperament = querys => {
-	return async dispatch => {
-		const { data } = await axios(`${dogEndpoint}?filter=${querys}`)
-		return dispatch({
-			type: FILTER_BY_TEMPERAMENT,
-			payload: data,
-		})
-	}
-} */
 export const filterByTemperament = temperaments => {
 	return dispatch => {
 		return dispatch({
