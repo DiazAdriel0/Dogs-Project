@@ -29,37 +29,38 @@ const Home = () => {
 			setFirstLoad(false)
 		}
 		dispatch(filterByTemperament(selectedTemperaments))
-		dispatch(orderDogs(selectedOrder))
+		dispatch(orderDogs(selectedOrder)) // The order remains even when temperament filters are removed
 	}, [selectedTemperaments])
 
 	const handleTemperamentChange = selected => {
 		setSelectedTemperaments(selected.map(option => option.value))
 	}
 
-	const handleOrderChange = event => {
-		const { value } = event.target
-		dispatch(orderDogs(value))
-		setSelectedOrder(value)
+	const handleOrder = selected => {
+		if (selected.length) {
+			const { value } = selected[0]
+			dispatch(orderDogs(value))
+			setSelectedOrder(value)
+		}
 	}
 
 	return (
 		<div className={style.containerHome}>
 			<Nav />
 			<h1>Home</h1>
-			<select
-				defaultValue={selectedOrder}
-				onChange={event => handleOrderChange(event)}
-			>
-				<option value='' disabled>
-					Order Dogs
-				</option>
-				<option value='A-Z'>A - Z</option>
-				<option value='Z-A'>Z - A</option>
-				<option value='AscWeight'>Ascending Weight</option>
-				<option value='DescWeight'>Descending Weight</option>
-			</select>
-
 			<SearchBar />
+			<SelectDropdown
+				options={[
+					{ value: 'A-Z', label: 'A - Z' },
+					{ value: 'Z-A', label: 'Z - A' },
+					{ value: 'AscWeight', label: 'Ascending Weight' },
+					{ value: 'DescWeight', label: 'Descending Weight' },
+				]}
+				multi={false}
+				clearable
+				placeholder='Order Dogs'
+				onChange={handleOrder}
+			/>
 			<SelectDropdown
 				options={allTemperaments.map(temperament => ({
 					value: temperament,

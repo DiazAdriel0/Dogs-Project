@@ -55,7 +55,6 @@ export const filterByTemperament = temperaments => {
 }
 
 export const orderDogs = order => {
-	console.log(order)
 	return dispatch => {
 		return dispatch({
 			type: ORDER_DOGS,
