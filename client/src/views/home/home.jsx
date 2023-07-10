@@ -7,52 +7,66 @@ import {
 	getAllDogs,
 	getTemperaments,
 	filterByTemperament,
+	orderDogs,
 } from '../../redux/actions/actions'
-import Dropdown from 'react-dropdown-select'
+import SelectDropdown from '../../components/selectDropdown/selectDropdown'
+import SearchBar from '../../components/searchBar/searchBar'
 
 const Home = () => {
-	const [selectedTemperaments, setSelectedTemperaments] = useState([])
-
 	const dispatch = useDispatch()
 
-	const allDogs = useSelector(state => state.allDogs)
+	const [selectedTemperaments, setSelectedTemperaments] = useState([])
 
 	const allTemperaments = useSelector(state => state.allTemperaments)
-
-	const filteredByTemp = useSelector(state => state.filteredByTemp)
-
-	useEffect(() => {
-		dispatch(getAllDogs())
-		dispatch(getTemperaments())
-	}, [])
+	const allDogs = useSelector(state => state.allDogs)
+	const change = useSelector(state => state.change)
 
 	useEffect(() => {
-		dispatch(filterByTemperament(selectedTemperaments.join(',')))
+		if (!allDogs.length || !allTemperaments.length) {
+			dispatch(getAllDogs())
+			dispatch(getTemperaments())
+		}
+	}, [change])
+
+	useEffect(() => {
+		dispatch(filterByTemperament(selectedTemperaments))
 	}, [selectedTemperaments])
 
 	const handleTemperamentChange = selected => {
 		setSelectedTemperaments(selected.map(option => option.value))
 	}
 
+	const handleOrderChange = event => {
+		const { value } = event.target
+		dispatch(orderDogs(value))
+	}
+
 	return (
 		<div className={style.containerHome}>
 			<Nav />
-			<Dropdown
+			<h1>Home</h1>
+			<select defaultValue='default' onChange={handleOrderChange}>
+				<option value='default' disabled>
+					Order Dogs
+				</option>
+				<option value='A-Z'>A - Z</option>
+				<option value='Z-A'>Z - A</option>
+				<option value='AscWeight'>Ascending Weight</option>
+				<option value='DescWeight'>Descending Weight</option>
+			</select>
+
+			<SearchBar />
+			<SelectDropdown
 				options={allTemperaments.map(temperament => ({
 					value: temperament,
 					label: temperament,
 				}))}
-				multi
+				multi={true}
 				clearable
 				placeholder='Temperaments'
 				onChange={handleTemperamentChange}
 			/>
-			<h1>Home</h1>
-			{selectedTemperaments.length ? (
-				<Cards dogs={filteredByTemp} />
-			) : (
-				<Cards dogs={allDogs} />
-			)}
+			<Cards allDogs={allDogs} />
 		</div>
 	)
 }

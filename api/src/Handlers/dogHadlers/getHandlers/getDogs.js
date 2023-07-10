@@ -9,7 +9,7 @@ const getDogs = async (req, res) => {
     const { data } = await axios(`${URL}?api_key=${API_KEY}`);
 
     // If it receives a filter query
-    if (filter) {
+    /* if (filter) {
       const filters = filter.split(",");
       const filteredDogs = [];
 
@@ -30,15 +30,15 @@ const getDogs = async (req, res) => {
 
         if (check) filteredDogs.push(dog);
       });
-      console.log(filteredDogs);
+
       if (!filteredDogs.length)
         throw new Error(
           "No se encontraron resultados con el filtro especificado"
         );
       return res.status(200).json(filteredDogs);
-    }
+    } */
     // Else if it receives a name query
-    else if (name) {
+    /* else  */ if (name) {
       const nameFilter = data.filter((dog) => {
         return dog.name.toLowerCase().includes(name.toLowerCase());
       });

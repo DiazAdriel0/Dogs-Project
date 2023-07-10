@@ -3,6 +3,7 @@ import {
 	FILTER_BY_TEMPERAMENT,
 	GET_ALL_DOGS,
 	GET_TEMPERAMENTS,
+	ORDER_DOGS,
 } from './actionTypes'
 
 // endpoints
@@ -44,12 +45,29 @@ export const getTemperaments = () => {
 	}
 }
 
-export const filterByTemperament = querys => {
+/* export const filterByTemperament = querys => {
 	return async dispatch => {
 		const { data } = await axios(`${dogEndpoint}?filter=${querys}`)
 		return dispatch({
 			type: FILTER_BY_TEMPERAMENT,
 			payload: data,
+		})
+	}
+} */
+export const filterByTemperament = temperaments => {
+	return dispatch => {
+		return dispatch({
+			type: FILTER_BY_TEMPERAMENT,
+			payload: temperaments,
+		})
+	}
+}
+
+export const orderDogs = order => {
+	return dispatch => {
+		return dispatch({
+			type: ORDER_DOGS,
+			payload: order,
 		})
 	}
 }
