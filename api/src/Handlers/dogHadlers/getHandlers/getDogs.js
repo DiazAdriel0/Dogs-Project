@@ -1,4 +1,5 @@
 const axios = require("axios");
+const findDogByName = require("../../../Controllers/dogControllers/findDogByName");
 const { API_KEY } = process.env;
 
 const URL = `https://api.thedogapi.com/v1/breeds/`;
@@ -9,12 +10,14 @@ const getDogs = async (req, res) => {
     const { data } = await axios(`${URL}?api_key=${API_KEY}`);
 
     if (name) {
-      const nameFilter = data.filter((dog) => {
+      const nameFilteredApi = data.filter((dog) => {
         return dog.name.toLowerCase().includes(name.toLowerCase());
       });
-      if (nameFilter.length === 0)
-        throw new Error("No se encontró la raza indicada");
-      return res.status(200).json(nameFilter);
+      const nameFilteredDB = await findDogByName(name);
+      if (!nameFilteredApi.length && !nameFilteredDB.length)
+        throw new Error(`No breed matching with ${name} search was found`);
+      const foundDogs = [...nameFilteredApi, ...nameFilteredDB];
+      return res.status(200).json(foundDogs);
     } else {
       return res.status(200).json(data);
     }

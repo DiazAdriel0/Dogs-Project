@@ -4,16 +4,19 @@ import {
 	GET_ALL_DOGS,
 	GET_TEMPERAMENTS,
 	ORDER_DOGS,
+	SEARCH_BY_NAME,
+	SELECTED_TEMPERAMENTS,
+	CURRENT_PAGE,
 } from './actionTypes'
 
-// endpoints
+// Endpoints
 const dogEndpoint = 'http://localhost:3001/dogs'
 const temperamentEndpoint = 'http://localhost:3001/temperaments/'
 
 export const getAllDogs = () => {
 	return async dispatch => {
-		const { data } = await axios(dogEndpoint)
 		try {
+			const { data } = await axios(dogEndpoint)
 			if (!data) throw new Error('Error al conectar con el servidor')
 			return dispatch({
 				type: GET_ALL_DOGS,
@@ -45,6 +48,21 @@ export const getTemperaments = () => {
 	}
 }
 
+export const searchDogsByName = search => {
+	return async dispatch => {
+		try {
+			const { data } = await axios(`${dogEndpoint}?name=${search}`)
+			if (!data) throw new Error('Error al conectar con el servidor')
+			return dispatch({
+				type: SEARCH_BY_NAME,
+				payload: data,
+			})
+		} catch (error) {
+			alert(error.message)
+		}
+	}
+}
+
 export const filterByTemperament = temperaments => {
 	return dispatch => {
 		return dispatch({
@@ -59,6 +77,24 @@ export const orderDogs = order => {
 		return dispatch({
 			type: ORDER_DOGS,
 			payload: order,
+		})
+	}
+}
+
+export const setSelectedTemperaments = temperaments => {
+	return dispatch => {
+		return dispatch({
+			type: SELECTED_TEMPERAMENTS,
+			payload: temperaments,
+		})
+	}
+}
+
+export const setCurrentPage = page => {
+	return dispatch => {
+		return dispatch({
+			type: CURRENT_PAGE,
+			payload: Number(page),
 		})
 	}
 }

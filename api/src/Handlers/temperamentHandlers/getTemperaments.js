@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { API_KEY } = process.env;
-const createTemperament = require("../../Controllers/temperamentController/createTemperament");
+const findOrCreateTemperament = require("../../Controllers/temperamentController/findOrCreateTemperament");
 
 const URL = `https://api.thedogapi.com/v1/breeds/`;
 
@@ -19,7 +19,7 @@ const getTemperaments = async (req, res) => {
     const temperamentSet = new Set(temperaments);
     const temperamentsArray = Array.from(temperamentSet);
     temperamentsArray.forEach(async (temperament) => {
-      await createTemperament(temperament);
+      await findOrCreateTemperament(temperament);
     });
     res.status(200).json(temperamentsArray);
   } catch (error) {

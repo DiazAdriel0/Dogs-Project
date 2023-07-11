@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { API_KEY } = process.env;
-const findDog = require("./../../../Controllers/dogControllers/findDog");
+const findDogById = require("./../../../Controllers/dogControllers/findDogById");
 
 const URL = `https://api.thedogapi.com/v1/breeds/`;
 
@@ -8,7 +8,7 @@ const getDogById = async (req, res) => {
   try {
     const { idRaza } = req.params;
 
-    const raza = await findDog(idRaza);
+    const raza = await findDogById(idRaza);
 
     if (raza) {
       res.status(200).json(raza);

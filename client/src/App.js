@@ -1,6 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import './App.css'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import Nav from './components/nav/nav'
 
 // Import views
 import Landing from './views/landing/landing'
@@ -9,8 +10,11 @@ import Detail from './views/detail/detail'
 import Create from './views/create/create'
 
 function App() {
+	const location = useLocation()
+
 	return (
 		<div className='App'>
+			{location.pathname === '/' ? null : <Nav />}
 			<Routes>
 				<Route exact path='/' element={<Landing />} />
 				<Route exact path='/home' element={<Home />} />
