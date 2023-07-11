@@ -74,18 +74,19 @@ const rootReducer = (state = initialState, { type, payload }) => {
 			}
 
 		case ORDER_DOGS:
-			if (payload === 'A-Z' || payload === '')
+			if (payload === 'A - Z' || payload === '')
 				orderedDogs = ascendingOrder(state.allDogs, 'name')
-			else if (payload === 'Z-A')
+			else if (payload === 'Z - A')
 				orderedDogs = descendingOrder(state.allDogs, 'name')
-			else if (payload === 'AscWeight')
+			else if (payload === 'Ascending Weight')
 				orderedDogs = ascendingOrder(state.allDogs, 'weight')
-			else if (payload === 'DescWeight')
+			else if (payload === 'Descending Weight')
 				orderedDogs = descendingOrder(state.allDogs, 'weight')
 
 			return {
 				...state,
 				allDogs: orderedDogs,
+				selectedOrder: payload,
 				currentPage: 1,
 			}
 
