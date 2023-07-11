@@ -6,6 +6,7 @@ import {
 	ORDER_DOGS,
 	SEARCH_BY_NAME,
 	SELECTED_TEMPERAMENTS,
+	SELECTED_ORDER,
 	CURRENT_PAGE,
 } from './actionTypes'
 
@@ -86,6 +87,15 @@ export const setSelectedTemperaments = temperaments => {
 		return dispatch({
 			type: SELECTED_TEMPERAMENTS,
 			payload: temperaments,
+		})
+	}
+}
+
+export const setSelectedOrder = order => {
+	return dispatch => {
+		return dispatch({
+			type: SELECTED_ORDER,
+			payload: order,
 		})
 	}
 }

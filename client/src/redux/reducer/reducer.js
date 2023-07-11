@@ -5,6 +5,7 @@ import {
 	ORDER_DOGS,
 	SEARCH_BY_NAME,
 	SELECTED_TEMPERAMENTS,
+	SELECTED_ORDER,
 	CURRENT_PAGE,
 } from '../actions/actionTypes'
 import { ascendingOrder, descendingOrder } from '../utils/orderFunctions'
@@ -13,12 +14,17 @@ import { filterByTemp } from '../utils/filterFunctions'
 const initialState = {
 	allDogs: [],
 	allDogsCopy: [],
+
 	allTemperaments: [],
 	selectedTemperaments: [],
+	selectedOrder: '',
+
 	currentPage: 1,
 }
 
 const rootReducer = (state = initialState, { type, payload }) => {
+	let orderedDogs = []
+
 	switch (type) {
 		case GET_ALL_DOGS:
 			return {
@@ -46,6 +52,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				selectedTemperaments: [...payload],
 			}
 
+		case SELECTED_ORDER:
+			return {
+				...state,
+				selectedOrder: payload,
+			}
+
 		case FILTER_BY_TEMPERAMENT:
 			if (payload.length) {
 				return {
@@ -62,37 +74,19 @@ const rootReducer = (state = initialState, { type, payload }) => {
 			}
 
 		case ORDER_DOGS:
-			if (payload === 'A-Z') {
-				const orderedDogs = ascendingOrder(state.allDogs, 'name')
-				return {
-					...state,
-					allDogs: orderedDogs,
-					currentPage: 1,
-				}
-			} else if (payload === 'Z-A') {
-				const orderedDogs = descendingOrder(state.allDogs, 'name')
-				return {
-					...state,
-					allDogs: orderedDogs,
-					currentPage: 1,
-				}
-			} else if (payload === 'AscWeight') {
-				const orderedDogs = ascendingOrder(state.allDogs, 'weight')
-				return {
-					...state,
-					allDogs: orderedDogs,
-					currentPage: 1,
-				}
-			} else if (payload === 'DescWeight') {
-				const orderedDogs = descendingOrder(state.allDogs, 'weight')
-				return {
-					...state,
-					allDogs: orderedDogs,
-					currentPage: 1,
-				}
-			}
+			if (payload === 'A-Z' || payload === '')
+				orderedDogs = ascendingOrder(state.allDogs, 'name')
+			else if (payload === 'Z-A')
+				orderedDogs = descendingOrder(state.allDogs, 'name')
+			else if (payload === 'AscWeight')
+				orderedDogs = ascendingOrder(state.allDogs, 'weight')
+			else if (payload === 'DescWeight')
+				orderedDogs = descendingOrder(state.allDogs, 'weight')
+
 			return {
 				...state,
+				allDogs: orderedDogs,
+				currentPage: 1,
 			}
 
 		case CURRENT_PAGE:

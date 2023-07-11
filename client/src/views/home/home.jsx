@@ -1,56 +1,87 @@
 import style from './home.module.css'
 import Cards from '../../components/cards/cards'
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useEffect /*  useState */ } from 'react'
 import {
 	getAllDogs,
 	getTemperaments,
 	filterByTemperament,
 	orderDogs,
 	setSelectedTemperaments,
+	setSelectedOrder,
 } from '../../redux/actions/actions'
-import SelectDropdown from '../../components/selectDropdown/selectDropdown'
+// import SelectDropdown from '../../components/selectDropdown/selectDropdown'
+import Select from 'react-dropdown-select'
 import SearchBar from '../../components/searchBar/searchBar'
 import Pagination from '../../components/pagination/pagination'
 
 const Home = () => {
 	// Local states
-	const [selectedOrder, setSelectedOrder] = useState('')
-	const [reset, setReset] = useState(false)
+	// const [selectedOrder, setSelectedOrder] = useState('')
+	// const [reset, setReset] = useState(false)
 
 	// Global states
 	const allTemperaments = useSelector(state => state.allTemperaments)
 	const allDogs = useSelector(state => state.allDogs)
 	const selectedTemperaments = useSelector(state => state.selectedTemperaments)
+	const selectedOrder = useSelector(state => state.selectedOrder)
 	const currentPage = useSelector(state => state.currentPage)
 	const dispatch = useDispatch()
 
-	useEffect(() => {
-		if (!allDogs.length) dispatch(getTemperaments())
-		if (!allTemperaments.length) dispatch(getAllDogs())
-		dispatch(filterByTemperament(selectedTemperaments))
-		dispatch(orderDogs(selectedOrder)) // The order remains even when temperament filters are removed
-		setReset(false)
-	}, [selectedTemperaments, reset])
+	useEffect(
+		() => {
+			if (!allDogs.length) dispatch(getAllDogs())
+			if (!allTemperaments.length) dispatch(getTemperaments())
+			/* dispatch(filterByTemperament(selectedTemperaments)) */
+			/* dispatch(orderDogs(selectedOrder)) */ // The order remains even when temperament filters are removed
+			/* setReset(false) */
+		},
+		[
+			/* selectedTemperaments, reset */
+		],
+	)
 
 	// Handlers
+	/* const handleTemperamentChange = selected => {
+		const selectedArray = selected.map(option => option.value)
+		dispatch(setSelectedTemperaments(selectedArray))
+		if (!selected.length) dispatch(setSelectedTemperaments([]))
+	} */
 	const handleTemperamentChange = selected => {
 		const selectedArray = selected.map(option => option.value)
 		dispatch(setSelectedTemperaments(selectedArray))
+		dispatch(filterByTemperament(selectedArray))
+		if (!selected.length) dispatch(setSelectedTemperaments([]))
 	}
+
+	/* const handleOrderChange = selected => {
+		// If the 'selected' array has no length, the app crashes
+		if (selected.length) {
+			const { value } = selected[0]
+			// setSelectedOrder(value)
+			dispatch(orderDogs(value))
+		} else {
+			// setSelectedOrder('')
+			dispatch(orderDogs(''))
+		}
+	} */
 	const handleOrderChange = selected => {
 		// If the 'selected' array has no length, the app crashes
 		if (selected.length) {
 			const { value } = selected[0]
+			dispatch(setSelectedOrder(value))
 			dispatch(orderDogs(value))
-			setSelectedOrder(value)
+		} else {
+			dispatch(setSelectedOrder(''))
+			dispatch(orderDogs(''))
 		}
 	}
+
 	const handleClick = () => {
 		dispatch(getAllDogs())
 		dispatch(setSelectedTemperaments([]))
-		setSelectedOrder('A-Z')
-		setReset(true)
+		// setSelectedOrder('A-Z')
+		// setReset(true)
 	}
 
 	// Pagination
@@ -65,7 +96,7 @@ const Home = () => {
 			<button onClick={handleClick}>Reset All Filters</button>
 			<SearchBar />
 			{/* <button onClick={handleFilter}>Filters</button> */}
-			{!reset && (
+			{/* {!reset && (
 				<SelectDropdown
 					options={[
 						{ value: 'A-Z', label: 'A - Z' },
@@ -75,7 +106,7 @@ const Home = () => {
 					]}
 					multi={false}
 					clearable
-					placeholder='Order Dogs'
+					placeholder={selectedOrder || 'Order Dogs'}
 					onChange={handleOrderChange}
 					closeOnSelect={true}
 				/>
@@ -92,7 +123,36 @@ const Home = () => {
 					onChange={handleTemperamentChange}
 					closeOnSelect={true}
 				/>
-			)}
+			)} */}
+
+			<Select
+				options={[
+					{ value: 'A-Z', label: 'A - Z' },
+					{ value: 'Z-A', label: 'Z - A' },
+					{ value: 'AscWeight', label: 'Ascending Weight' },
+					{ value: 'DescWeight', label: 'Descending Weight' },
+				]}
+				values={[]}
+				onChange={handleOrderChange}
+				clearable
+				placeholder={selectedOrder || 'Order Dogs'}
+				closeOnSelect
+			/>
+
+			<Select
+				options={allTemperaments.map(temperament => ({
+					value: temperament,
+					label: temperament,
+				}))}
+				values={[]}
+				onChange={handleTemperamentChange}
+				multi
+				clearable
+				placeholder={selectedTemperaments.join(', ') || 'Temperaments'}
+				closeOnSelect
+			/>
+
+			<Pagination />
 			<Cards allDogs={currentPageDogs} />
 			<Pagination />
 		</div>
