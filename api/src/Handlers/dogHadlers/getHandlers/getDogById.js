@@ -8,7 +8,7 @@ const getDogById = async (req, res) => {
   try {
     const { idRaza } = req.params;
 
-    const raza = await findDogById(idRaza);
+    const raza = isNaN(idRaza) && (await findDogById(idRaza));
 
     if (raza) {
       res.status(200).json(raza);

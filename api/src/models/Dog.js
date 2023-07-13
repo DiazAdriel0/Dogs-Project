@@ -5,10 +5,11 @@ module.exports = (sequelize) => {
     "Dog",
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         primaryKey: true,
         unique: true,
         allowNull: false,
+        defaultValue: DataTypes.UUIDV4,
       },
       name: {
         type: DataTypes.STRING,
@@ -19,17 +20,27 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       height: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          min: 0,
+          format(value) {
+            // If the string doesn't have the format 'number - number', entering the breed is not allowed.
+            if (!/^\d+ - \d+$/.test(value)) {
+              throw new Error('The format must be "number - number"');
+            }
+          },
         },
       },
       weight: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          min: 0,
+          format(value) {
+            // If the string doesn't have the format 'number - number', entering the breed is not allowed.
+            if (!/^\d+ - \d+$/.test(value)) {
+              throw new Error('The format must be "number - number"');
+            }
+          },
         },
       },
       age: {

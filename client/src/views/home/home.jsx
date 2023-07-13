@@ -2,17 +2,13 @@ import style from './home.module.css'
 import Cards from '../../components/cards/cards'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import {
-	getAllDogs,
-	getTemperaments,
-	filterByTemperament,
-	orderDogs,
-	setSelectedTemperaments,
-	setSelectedOrder,
-} from '../../redux/actions/actions'
+import { getAllDogs, getTemperaments } from '../../redux/actions/actions'
 import Select from 'react-dropdown-select'
 import SearchBar from '../../components/searchBar/searchBar'
 import Pagination from '../../components/pagination/pagination'
+import useHomeHandlers from '../../hooks/useHomeHandlers'
+import useOptions from '../../hooks/useOptions'
+import usePagination from '../../hooks/usePagination'
 
 const Home = () => {
 	// Global states
@@ -20,7 +16,13 @@ const Home = () => {
 	const allDogs = useSelector(state => state.allDogs)
 	const selectedTemperaments = useSelector(state => state.selectedTemperaments)
 	const selectedOrder = useSelector(state => state.selectedOrder)
-	const currentPage = useSelector(state => state.currentPage)
+	const selectedOrigin = useSelector(state => state.selectedOrigin)
+
+	// Custom Hooks
+	const homeHandlers = useHomeHandlers()
+	const options = useOptions()
+	const pagination = usePagination()
+
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -28,78 +30,46 @@ const Home = () => {
 		if (!allTemperaments.length) dispatch(getTemperaments())
 	}, [])
 
-	// Handlers
-	const handleTemperamentChange = selected => {
-		const selectedArray = selected.map(option => option.value)
-		dispatch(setSelectedTemperaments(selectedArray))
-		dispatch(filterByTemperament(selectedArray))
-		if (!selected.length) dispatch(setSelectedTemperaments([]))
-	}
-
-	const handleOrderChange = selected => {
-		// If the 'selected' array has no length, the app crashes
-		if (selected.length) {
-			const { value } = selected[0]
-			dispatch(setSelectedOrder(value))
-			dispatch(orderDogs(value))
-		} else {
-			dispatch(setSelectedOrder(''))
-			dispatch(orderDogs(''))
-		}
-	}
-
-	const handleClick = () => {
-		dispatch(getAllDogs())
-		dispatch(setSelectedTemperaments([]))
-	}
-
-	// Pagination
-	const perPage = 8
-	const firstIndex = perPage * (currentPage - 1)
-	const lastIndex = perPage * currentPage - 1
-	const currentPageDogs = allDogs.slice(firstIndex, lastIndex + 1)
-
-	// Order Options
-	const orderOptions = [
-		'A - Z',
-		'Z - A',
-		'Ascending Weight',
-		'Descending Weight',
-	]
-
 	return (
 		<div className={style.containerHome}>
 			<h1>Home</h1>
-			<button onClick={handleClick}>Reset All Filters</button>
+			<button onClick={homeHandlers.handleClick}>Reset All Filters</button>
 			<SearchBar />
 
-			<Select
-				options={orderOptions.map(order => ({
-					value: order,
-					label: order,
-				}))}
-				values={[]}
-				onChange={handleOrderChange}
-				clearable
-				placeholder={selectedOrder || 'Order Dogs'}
-				closeOnSelect
-			/>
+			<div>
+				{!homeHandlers.error && (
+					<Select
+						options={options.originOptions}
+						values={selectedOrigin}
+						onChange={homeHandlers.handleFromChange}
+						clearable
+						placeholder={'Origin of Dogs'}
+						closeOnSelect
+					/>
+				)}
 
-			<Select
-				options={allTemperaments.map(temperament => ({
-					value: temperament,
-					label: temperament,
-				}))}
-				values={[]}
-				onChange={handleTemperamentChange}
-				multi
-				clearable
-				placeholder={selectedTemperaments.join(', ') || 'Temperaments'}
-				closeOnSelect
-			/>
+				<Select
+					options={options.orderOptions}
+					values={selectedOrder}
+					onChange={homeHandlers.handleOrderChange}
+					clearable
+					placeholder={'Order Dogs'}
+					closeOnSelect
+				/>
+
+				<Select
+					options={options.temperamentsOptions}
+					values={selectedTemperaments}
+					onChange={homeHandlers.handleTemperamentChange}
+					multi
+					clearable
+					placeholder={selectedTemperaments.join(', ') || 'Temperaments'}
+					closeOnSelect
+				/>
+			</div>
 
 			<Pagination />
-			<Cards allDogs={currentPageDogs} />
+			<Cards allDogs={pagination.currentPageDogs} />
 			<Pagination />
 		</div>
 	)

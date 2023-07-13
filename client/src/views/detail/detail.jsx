@@ -2,19 +2,18 @@
 import style from './detail.module.css'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const Detail = () => {
 	const [dog, setDog] = useState({})
 	const { id } = useParams()
 
-	useEffect(() => {
-		const request = async () => {
-			const { data } = await axios(`http://localhost:3001/dogs/${id}`)
-			setDog(data)
-		}
-		request()
-	}, [])
+	const request = async () => {
+		const { data } = await axios(`http://localhost:3001/dogs/${id}`)
+		setDog(data)
+	}
+	request()
+
 	const {
 		name,
 		image,

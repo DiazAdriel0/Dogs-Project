@@ -8,20 +8,24 @@ const SearchBar = () => {
 
 	const dispatch = useDispatch()
 
-	const handleClick = () => {
+	const handleClick = event => {
+		event.preventDefault()
 		dispatch(searchDogsByName(search))
 		setSearch('')
 	}
 
 	return (
 		<div className={style.containerSearchBar}>
-			<input
-				type='text'
-				placeholder='Breed Search'
-				onChange={event => setSearch(event.target.value)}
-				value={search}
-			/>
-			<button onClick={handleClick}>Search</button>
+			{/* It is enclosed within a form just so that when the user presses 'ENTER', the search is executed */}
+			<form onSubmit={handleClick}>
+				<input
+					type='search'
+					placeholder='Breed Search'
+					onChange={event => setSearch(event.target.value)}
+					value={search}
+				/>
+				<button type='submit'>Search</button>
+			</form>
 		</div>
 	)
 }

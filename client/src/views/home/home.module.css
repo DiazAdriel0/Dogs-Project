@@ -6,3 +6,11 @@
 .temperaments {
 	color: #000;
 }
+
+paleta {
+	--color-primary: #ff6f00;
+	--color-secondary: #00796b;
+	--color-accent: #e91e63;
+	--color-neutral-1: #ffffff;
+	--color-neutral-2: #212121;
+}

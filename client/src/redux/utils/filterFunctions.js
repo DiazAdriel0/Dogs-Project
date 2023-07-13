@@ -21,3 +21,13 @@ export const filterByTemp = (allDogs, temperaments) => {
 
 	return filteredDogs
 }
+
+export const filterByName = (allDogs, dogsFilteredByName) => {
+	const filteredDogs = allDogs.filter(dog =>
+		dogsFilteredByName.some(dogFiltered => dogFiltered.name === dog.name),
+	)
+	if (!filteredDogs.length)
+		alert('No breed matching with your search was found for these filters')
+
+	return filteredDogs
+}

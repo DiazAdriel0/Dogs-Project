@@ -7,7 +7,9 @@ import {
 	SEARCH_BY_NAME,
 	SELECTED_TEMPERAMENTS,
 	SELECTED_ORDER,
+	SELECTED_ORIGIN,
 	CURRENT_PAGE,
+	ORIGIN,
 } from './actionTypes'
 
 // Endpoints
@@ -18,7 +20,6 @@ export const getAllDogs = () => {
 	return async dispatch => {
 		try {
 			const { data } = await axios(dogEndpoint)
-			if (!data) throw new Error('Error al conectar con el servidor')
 			return dispatch({
 				type: GET_ALL_DOGS,
 				payload: data,
@@ -33,7 +34,6 @@ export const getTemperaments = () => {
 	return async dispatch => {
 		try {
 			const { data } = await axios(temperamentEndpoint)
-			if (data.length === 0) throw new Error('Temperaments not found')
 			const orderedTemperaments = data.sort((a, b) => {
 				if (a > b) return 1
 				if (a < b) return -1
@@ -53,13 +53,12 @@ export const searchDogsByName = search => {
 	return async dispatch => {
 		try {
 			const { data } = await axios(`${dogEndpoint}?name=${search}`)
-			if (!data) throw new Error('Error al conectar con el servidor')
 			return dispatch({
 				type: SEARCH_BY_NAME,
 				payload: data,
 			})
 		} catch (error) {
-			alert(error.message)
+			alert(`No breed matching with ${search} search was found`)
 		}
 	}
 }
@@ -100,11 +99,29 @@ export const setSelectedOrder = order => {
 	}
 }
 
+export const setSelectedOrigin = origin => {
+	return dispatch => {
+		return dispatch({
+			type: SELECTED_ORIGIN,
+			payload: origin,
+		})
+	}
+}
+
 export const setCurrentPage = page => {
 	return dispatch => {
 		return dispatch({
 			type: CURRENT_PAGE,
 			payload: Number(page),
+		})
+	}
+}
+
+export const dogsFrom = typeOfId => {
+	return dispatch => {
+		return dispatch({
+			type: ORIGIN,
+			payload: typeOfId,
 		})
 	}
 }

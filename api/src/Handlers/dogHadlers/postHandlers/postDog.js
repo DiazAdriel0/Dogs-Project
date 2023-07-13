@@ -15,7 +15,7 @@ const postDog = async (req, res) => {
     const createdDog = await createDog(newDog);
     res.status(200).json(createdDog);
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(400).json(error.message);
   }
 };
 
