@@ -2,7 +2,7 @@ import style from './home.module.css'
 import Cards from '../../components/cards/cards'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { getAllDogs, getTemperaments } from '../../redux/actions/actions'
+import { getAllDogs } from '../../redux/actions/actions'
 import Select from 'react-dropdown-select'
 import SearchBar from '../../components/searchBar/searchBar'
 import Pagination from '../../components/pagination/pagination'
@@ -12,7 +12,6 @@ import usePagination from '../../hooks/usePagination'
 
 const Home = () => {
 	// Global states
-	const allTemperaments = useSelector(state => state.allTemperaments)
 	const allDogs = useSelector(state => state.allDogs)
 	const selectedTemperaments = useSelector(state => state.selectedTemperaments)
 	const selectedOrder = useSelector(state => state.selectedOrder)
@@ -27,7 +26,6 @@ const Home = () => {
 
 	useEffect(() => {
 		if (!allDogs.length) dispatch(getAllDogs())
-		if (!allTemperaments.length) dispatch(getTemperaments())
 	}, [])
 
 	return (
@@ -39,31 +37,34 @@ const Home = () => {
 			<div>
 				{!homeHandlers.error && (
 					<Select
+						className={style.originSelect}
 						options={options.originOptions}
 						values={selectedOrigin}
 						onChange={homeHandlers.handleFromChange}
 						clearable
-						placeholder={'Origin of Dogs'}
+						placeholder='Origin of Dogs'
 						closeOnSelect
 					/>
 				)}
 
 				<Select
+					className={style.orderSelect}
 					options={options.orderOptions}
 					values={selectedOrder}
 					onChange={homeHandlers.handleOrderChange}
 					clearable
-					placeholder={'Order Dogs'}
+					placeholder='Order Dogs'
 					closeOnSelect
 				/>
 
 				<Select
+					className={style.temperamentsSelect}
 					options={options.temperamentsOptions}
 					values={selectedTemperaments}
 					onChange={homeHandlers.handleTemperamentChange}
 					multi
 					clearable
-					placeholder={selectedTemperaments.join(', ') || 'Temperaments'}
+					placeholder='Temperaments'
 					closeOnSelect
 				/>
 			</div>

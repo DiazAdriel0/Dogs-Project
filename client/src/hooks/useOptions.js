@@ -1,7 +1,11 @@
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { getTemperaments } from '../redux/actions/actions'
 
 const useOptions = () => {
 	const allTemperaments = useSelector(state => state.allTemperaments)
+	const dispatch = useDispatch()
+
+	if (!allTemperaments.length) dispatch(getTemperaments())
 
 	const originOptions = [
 		{ value: 'Only API Dogs', label: 'Only API Dogs' },

@@ -1,12 +1,10 @@
 import style from './landing.module.css'
-import { Link } from 'react-router-dom'
+import Background from './background/background'
 
 const Landing = () => {
 	return (
 		<div className={style.containerLanding}>
-			<Link to='/home'>
-				<button>Home</button>
-			</Link>
+			<Background />
 		</div>
 	)
 }

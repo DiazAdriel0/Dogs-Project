@@ -7,7 +7,9 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	/* Agrego */
 	background-color: #313352;
-	color: lightgray;
+	color: #ff6f00;
+	width: 100%;
+	height: 100%;
 }
 
 code {

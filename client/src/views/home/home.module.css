@@ -7,6 +7,18 @@
 	color: #000;
 }
 
+.originSelect {
+	background-color: #212121;
+	color: #ff6f00;
+}
+
+.orderSelect {
+	background-color: #212121;
+}
+
+.temperamentsSelect {
+	background-color: #212121;
+}
 paleta {
 	--color-primary: #ff6f00;
 	--color-secondary: #00796b;
