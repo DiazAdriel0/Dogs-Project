@@ -24,15 +24,17 @@ const useHomeHandlers = () => {
 	const [selectedOrderOptions, setSelectedOrderOptions] = useState([])
 	// eslint-disable-next-line no-unused-vars
 	const [selectedTempOptions, setSelectedTempOptions] = useState([])
-	const [error, setError] = useState(false)
+	const [originError, setOriginError] = useState(false)
+	const [temperamentsError, setTemperamentsError] = useState(false)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
 		setSelectedOriginOptions(selectedOrigin)
 		setSelectedOrderOptions(selectedOrder)
 		setSelectedTempOptions(selectedTemperaments)
-		setError(false)
-	}, [error])
+		setOriginError(false)
+		setTemperamentsError(false)
+	}, [originError, temperamentsError])
 
 	// Handlers
 	const handleFromChange = selected => {
@@ -56,7 +58,7 @@ const useHomeHandlers = () => {
 			}
 		} catch (error) {
 			alert(error.message)
-			setError(true)
+			setOriginError(true)
 			setSelectedOriginOptions([])
 			dispatch(setSelectedOrigin([]))
 		}
@@ -77,18 +79,25 @@ const useHomeHandlers = () => {
 
 	const handleTemperamentChange = selected => {
 		try {
-			const selectedArray = selected.map(option => option.value)
-			setSelectedTempOptions(selected)
-			dispatch(setSelectedTemperaments(selected))
-			dispatch(filterByTemperament(selectedArray))
+			if (selected.length) {
+				const selectedArray = selected.map(option => option.value)
+				setSelectedTempOptions(selected)
+				dispatch(setSelectedTemperaments(selected))
+				dispatch(filterByTemperament(selectedArray))
+			}
+
 			if (!selected.length) {
+				setSelectedTempOptions([])
 				dispatch(setSelectedTemperaments([]))
+				dispatch(filterByTemperament([]))
 			}
 		} catch (error) {
 			alert(error.message)
-			selectedTempOptions.pop()
-			setSelectedTempOptions(selectedTempOptions)
-			dispatch(setSelectedTemperaments(selectedTempOptions))
+			setTemperamentsError(true)
+			selected = selected.slice(0, selected.length - 1)
+			const selectedArray = selected.map(option => option.value)
+			dispatch(setSelectedTemperaments(selected))
+			dispatch(filterByTemperament(selectedArray))
 		}
 	}
 
@@ -111,7 +120,8 @@ const useHomeHandlers = () => {
 		setSelectedOriginOptions,
 		setSelectedOrderOptions,
 		setSelectedTempOptions,
-		error,
+		originError,
+		temperamentsError,
 	}
 }
 

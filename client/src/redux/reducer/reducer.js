@@ -11,11 +11,7 @@ import {
 	ORIGIN,
 } from '../actions/actionTypes'
 import { ascendingOrder, descendingOrder } from '../utils/orderFunctions'
-import {
-	filterByName,
-	/* filterByTemp, */
-	filterMaster,
-} from '../utils/filterFunctions'
+import { filterByName, filterMaster } from '../utils/filterFunctions'
 
 const initialState = {
 	allDogs: [],
@@ -54,8 +50,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
 			filteredDogs = filterByName(state.allDogs, payload)
 			return {
 				...state,
-				allDogs: filteredDogs.length ? filteredDogs : state.allDogs,
-				allDogsFiltered: filteredDogs.length ? filteredDogs : state.allDogs,
+				allDogs: filteredDogs,
+				allDogsFiltered: filteredDogs,
 				currentPage: 1,
 			}
 
@@ -76,13 +72,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				...state,
 				selectedOrigin: [...payload],
 			}
-		// CAMBIOS
+
 		case FILTER_BY_TEMPERAMENT:
-			filteredDogs = filterMaster(state.allDogsCopy, [
-				state.selectedTemperaments,
-				state.selectedOrigin,
-			])
-			if (payload.length) {
+			if (payload.length && payload !== 'error') {
+				filteredDogs = filterMaster(state.allDogsCopy, [
+					state.selectedTemperaments,
+					state.selectedOrigin,
+				])
 				return {
 					...state,
 					allDogs: filteredDogs,
@@ -90,10 +86,14 @@ const rootReducer = (state = initialState, { type, payload }) => {
 					currentPage: 1,
 				}
 			} else {
+				filteredDogs = filterMaster(state.allDogsCopy, [
+					[],
+					state.selectedOrigin,
+				])
 				return {
 					...state,
-					allDogs: state.allDogsCopy,
-					allDogsFiltered: state.allDogsCopy,
+					allDogs: filteredDogs,
+					allDogsFiltered: filteredDogs,
 					selectedTemperaments: [],
 					currentPage: 1,
 				}
@@ -155,10 +155,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
 					currentPage: 1,
 				}
 			} else {
-				state.selectedOrigin = []
 				filteredDogs = filterMaster(state.allDogsCopy, [
 					state.selectedTemperaments,
-					state.selectedOrigin,
+					[],
 				])
 				return {
 					...state,

@@ -21,7 +21,6 @@ const Home = () => {
 	const homeHandlers = useHomeHandlers()
 	const options = useOptions()
 	const pagination = usePagination()
-
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -35,7 +34,7 @@ const Home = () => {
 			<SearchBar />
 
 			<div>
-				{!homeHandlers.error && (
+				{!homeHandlers.originError && (
 					<Select
 						className={style.originSelect}
 						options={options.originOptions}
@@ -57,16 +56,18 @@ const Home = () => {
 					closeOnSelect
 				/>
 
-				<Select
-					className={style.temperamentsSelect}
-					options={options.temperamentsOptions}
-					values={selectedTemperaments}
-					onChange={homeHandlers.handleTemperamentChange}
-					multi
-					clearable
-					placeholder='Temperaments'
-					closeOnSelect
-				/>
+				{!homeHandlers.temperamentsError && (
+					<Select
+						className={style.temperamentsSelect}
+						options={options.temperamentsOptions}
+						values={selectedTemperaments}
+						onChange={homeHandlers.handleTemperamentChange}
+						multi
+						clearable
+						placeholder='Temperaments'
+						closeOnSelect
+					/>
+				)}
 			</div>
 
 			<Pagination />

@@ -1,30 +1,3 @@
-export const filterByTemp = (allDogs, temperaments) => {
-	const filteredDogs = []
-
-	allDogs.forEach(dog => {
-		let check = false
-
-		if (dog.temperament) {
-			for (let i = 0; i < temperaments.length; i++) {
-				const filter = temperaments[i]
-				if (dog.temperament.includes(filter)) {
-					check = true
-				} else {
-					check = false
-					break
-				}
-			}
-		}
-
-		if (check) filteredDogs.push(dog)
-	})
-	// VER
-	if (!filteredDogs.length)
-		throw new Error('No breed matching for these filters')
-
-	return filteredDogs
-}
-
 export const filterByName = (allDogs, dogsFilteredByName) => {
 	const filteredDogs = allDogs.filter(dog =>
 		dogsFilteredByName.some(dogFiltered => dogFiltered.name === dog.name),
@@ -63,6 +36,10 @@ export const filterMaster = (allDogsCopy, selectedFilters) => {
 
 			if (check) filteredDogsByTemp.push(dog)
 		})
+
+		if (!filteredDogsByTemp.length) {
+			throw new Error('No breed matching for these filters')
+		}
 	} else {
 		filteredDogsByTemp = allDogsCopy
 	}
