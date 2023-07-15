@@ -11,7 +11,11 @@ import {
 	ORIGIN,
 } from '../actions/actionTypes'
 import { ascendingOrder, descendingOrder } from '../utils/orderFunctions'
-import { filterByName, filterByTemp } from '../utils/filterFunctions'
+import {
+	filterByName,
+	/* filterByTemp, */
+	filterMaster,
+} from '../utils/filterFunctions'
 
 const initialState = {
 	allDogs: [],
@@ -72,9 +76,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				...state,
 				selectedOrigin: [...payload],
 			}
-
+		// CAMBIOS
 		case FILTER_BY_TEMPERAMENT:
-			filteredDogs = filterByTemp(state.allDogsCopy, payload)
+			filteredDogs = filterMaster(state.allDogsCopy, [
+				state.selectedTemperaments,
+				state.selectedOrigin,
+			])
 			if (payload.length) {
 				return {
 					...state,
@@ -87,6 +94,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
 					...state,
 					allDogs: state.allDogsCopy,
 					allDogsFiltered: state.allDogsCopy,
+					selectedTemperaments: [],
 					currentPage: 1,
 				}
 			}
@@ -123,37 +131,41 @@ const rootReducer = (state = initialState, { type, payload }) => {
 			}
 
 		case ORIGIN:
-			if (payload === 'clear') {
+			if (payload === 'Only API Dogs') {
+				filteredDogs = filterMaster(state.allDogsCopy, [
+					state.selectedTemperaments,
+					state.selectedOrigin,
+				])
+				return {
+					...state,
+					allDogs: filteredDogs,
+					allDogsFiltered: filteredDogs,
+					currentPage: 1,
+				}
+			}
+			if (payload === 'Only Created Dogs') {
+				filteredDogs = filterMaster(state.allDogsCopy, [
+					state.selectedTemperaments,
+					state.selectedOrigin,
+				])
+				return {
+					...state,
+					allDogs: filteredDogs,
+					allDogsFiltered: filteredDogs,
+					currentPage: 1,
+				}
+			} else {
+				state.selectedOrigin = []
+				filteredDogs = filterMaster(state.allDogsCopy, [
+					state.selectedTemperaments,
+					state.selectedOrigin,
+				])
 				return {
 					...state,
 					selectedOrigin: [],
-				}
-			}
-			if (!isNaN(payload)) {
-				filteredDogs = state.allDogsFiltered.filter(dog => !isNaN(dog.id))
-				if (!filteredDogs.length) {
-					state.selectedOrigin = []
-					throw new Error(
-						'No dogs were found in the API based on the selected filters',
-					)
-				}
-				return {
-					...state,
 					allDogs: filteredDogs,
 					allDogsFiltered: filteredDogs,
-				}
-			} else {
-				filteredDogs = state.allDogsFiltered.filter(dog => isNaN(dog.id))
-				if (!filteredDogs.length) {
-					state.selectedOrigin = []
-					throw new Error(
-						'No dogs were found created based on the selected filters',
-					)
-				}
-				return {
-					...state,
-					allDogs: filteredDogs,
-					allDogsFiltered: filteredDogs,
+					currentPage: 1,
 				}
 			}
 

@@ -7,7 +7,7 @@ const usePagination = () => {
 	const dispatch = useDispatch()
 
 	const cardsPerPage = 8
-
+	let currentPageDogs = []
 	const totalPages = Math.ceil(allDogs.length / cardsPerPage)
 
 	const pages = Array.from(
@@ -17,7 +17,10 @@ const usePagination = () => {
 
 	const firstIndex = cardsPerPage * (currentPage - 1)
 	const lastIndex = cardsPerPage * currentPage - 1
-	const currentPageDogs = allDogs.slice(firstIndex, lastIndex + 1)
+
+	if (allDogs.length) {
+		currentPageDogs = allDogs?.slice(firstIndex, lastIndex + 1)
+	}
 
 	const handleClick = event => {
 		const { value } = event.target

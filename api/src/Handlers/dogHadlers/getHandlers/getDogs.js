@@ -9,7 +9,7 @@ const getDogs = async (req, res) => {
   try {
     const { name } = req.query;
     const { data } = await axios(`${URL}?api_key=${API_KEY}`);
-    console.log(data);
+
     if (name) {
       const nameFilteredApi = data.filter((dog) => {
         return dog.name.toLowerCase().includes(name.toLowerCase());

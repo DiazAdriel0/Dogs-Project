@@ -2,17 +2,19 @@ const createDog = require("./../../../Controllers/dogControllers/createDog");
 
 const postDog = async (req, res) => {
   try {
-    const { id, name, image, height, weight, age, temperament } = req.body;
+    const { name, image, height, weight, life_span, temperament } = req.body;
+    const tempsArray = temperament
+      .split(",")
+      .map((temperament) => temperament.trim());
     const newDog = {
-      id,
       name,
       image,
       height,
       weight,
-      age,
-      temperament,
+      life_span,
     };
-    const createdDog = await createDog(newDog);
+    const createdDog = await createDog(newDog, tempsArray);
+    console.log(createDog.temperaments);
     res.status(200).json(createdDog);
   } catch (error) {
     res.status(400).json(error.message);

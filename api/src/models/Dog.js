@@ -15,36 +15,70 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      image: {
+      bred_for: {
         type: DataTypes.STRING,
-        allowNull: false,
       },
-      height: {
+      breed_group: {
         type: DataTypes.STRING,
+      },
+      origin: {
+        type: DataTypes.STRING,
+      },
+      image: {
+        type: DataTypes.JSON,
         allowNull: false,
         validate: {
-          format(value) {
+          validateFormat(value) {
+            if (!value.url) {
+              throw new Error('The "image" object must have "url" property.');
+            }
+          },
+        },
+      },
+      height: {
+        type: DataTypes.JSON,
+        allowNull: false,
+        validate: {
+          validateFormat(value) {
+            if (!value.imperial || !value.metric) {
+              throw new Error(
+                'The "height" object must have "imperial" and "metric" properties.'
+              );
+            }
+
             // If the string doesn't have the format 'number - number', entering the breed is not allowed.
-            if (!/^\d+ - \d+$/.test(value)) {
-              throw new Error('The format must be "number - number"');
+            const regex = /^\d+ - \d+$/;
+            if (!regex.test(value.imperial) || !regex.test(value.metric)) {
+              throw new Error(
+                'The format of the "imperial" and "metric" properties must be "number - number"'
+              );
             }
           },
         },
       },
       weight: {
-        type: DataTypes.STRING,
+        type: DataTypes.JSON,
         allowNull: false,
         validate: {
-          format(value) {
+          validateFormat(value) {
+            if (!value.imperial || !value.metric) {
+              throw new Error(
+                'The "weight" object must have "imperial" and "metric" properties.'
+              );
+            }
+
             // If the string doesn't have the format 'number - number', entering the breed is not allowed.
-            if (!/^\d+ - \d+$/.test(value)) {
-              throw new Error('The format must be "number - number"');
+            const regex = /^\d+ - \d+$/;
+            if (!regex.test(value.imperial) || !regex.test(value.metric)) {
+              throw new Error(
+                'The format of the "imperial" and "metric" properties must be "number - number"'
+              );
             }
           },
         },
       },
-      age: {
-        type: DataTypes.INTEGER,
+      life_span: {
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
           min: 0,

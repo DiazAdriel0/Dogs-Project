@@ -43,11 +43,11 @@ const useHomeHandlers = () => {
 				if (value === 'Only API Dogs') {
 					setSelectedOriginOptions(selected)
 					dispatch(setSelectedOrigin(selected))
-					dispatch(dogsFrom(1))
+					dispatch(dogsFrom(value))
 				} else if (value === 'Only Created Dogs') {
-					dispatch(dogsFrom(NaN))
-					dispatch(setSelectedOrigin(selected))
 					setSelectedOriginOptions(selected)
+					dispatch(setSelectedOrigin(selected))
+					dispatch(dogsFrom(value))
 				}
 			} else {
 				setSelectedOriginOptions([])
@@ -76,12 +76,19 @@ const useHomeHandlers = () => {
 	}
 
 	const handleTemperamentChange = selected => {
-		const selectedArray = selected.map(option => option.value)
-		setSelectedTempOptions(selected)
-		dispatch(setSelectedTemperaments(selected))
-		dispatch(filterByTemperament(selectedArray))
-		if (!selected.length) {
-			dispatch(setSelectedTemperaments([]))
+		try {
+			const selectedArray = selected.map(option => option.value)
+			setSelectedTempOptions(selected)
+			dispatch(setSelectedTemperaments(selected))
+			dispatch(filterByTemperament(selectedArray))
+			if (!selected.length) {
+				dispatch(setSelectedTemperaments([]))
+			}
+		} catch (error) {
+			alert(error.message)
+			selectedTempOptions.pop()
+			setSelectedTempOptions(selectedTempOptions)
+			dispatch(setSelectedTemperaments(selectedTempOptions))
 		}
 	}
 

@@ -81,6 +81,7 @@ const useInputsAndErrors = () => {
 			})
 			alert("There can't be empty fields")
 		} else if (areErrorsEmpty) {
+			console.log(inputs.temperamentsSelect)
 			setInputs({
 				name: '',
 				minImperialHeight: '',
@@ -92,6 +93,7 @@ const useInputsAndErrors = () => {
 				temperamentsSelect: '',
 			})
 			setSelectedTemps([])
+
 			alert('Success created')
 		} else {
 			alert(
