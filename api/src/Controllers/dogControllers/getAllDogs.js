@@ -15,8 +15,6 @@ const getAllDogs = async () => {
       };
     });
 
-    console.log(dogsWithTemperaments);
-
     return dogsWithTemperaments;
   } catch (error) {
     console.error("There are no dogs in database");

@@ -6,19 +6,20 @@ const URL = `https://api.thedogapi.com/v1/breeds/`;
 
 const getDogById = async (req, res) => {
   try {
-    const { idRaza } = req.params;
+    const { idDog } = req.params;
 
-    const raza = isNaN(idRaza) && (await findDogById(idRaza));
+    const dog = isNaN(idDog) && (await findDogById(idDog));
 
-    if (raza) {
-      res.status(200).json(raza);
+    if (dog) {
+      res.status(200).json(dog);
     } else {
       const { data } = await axios(`${URL}?api_key=${API_KEY}`);
-      const dog = data.find((dog) => dog.id === Number(idRaza));
+      const dog = data.find((dog) => dog.id === Number(idDog));
+      if (!dog) throw new Error("No breed matches the searched id");
       res.status(200).json(dog);
     }
   } catch (error) {
-    res.status(400).json(error.message);
+    res.status(400).json({ error: error.message });
   }
 };
 

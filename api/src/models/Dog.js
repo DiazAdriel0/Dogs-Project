@@ -80,14 +80,7 @@ module.exports = (sequelize) => {
       life_span: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          min: 0,
-        },
       },
-      // temperament: {
-      // type: DataTypes.ENUM(),//Completar con temperaments
-      // allowNull: false
-      // }
     },
     { timestamps: false }
   );

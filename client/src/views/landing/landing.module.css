@@ -1,0 +1,24 @@
+.title {
+	font-family: 'Sniglet', cursive;
+	text-align: center;
+	position: absolute;
+	z-index: 9;
+	top: 15%;
+	width: 100%;
+}
+
+.spanClick {
+	font-family: 'Sniglet' cursive;
+	text-align: center;
+	position: absolute;
+	font-weight: bold;
+	z-index: 9;
+	bottom: 25%;
+	left: 43.5%;
+	opacity: 0;
+	transition: opacity 0.8s ease;
+}
+
+.visible {
+	opacity: 1;
+}

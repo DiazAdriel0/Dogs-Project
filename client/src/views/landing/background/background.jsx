@@ -1,14 +1,6 @@
 import { Link } from 'react-router-dom'
 import style from './background.module.css'
 
-/* const imagen = document.getElementById('imagen')
-imagen.addEventListener('click', () => {
-	imagen.classList.add('clicked')
-	setTimeout(() => {
-		imagen.classList.remove('clicked')
-	}, 300)
-}) */
-
 const Background = () => {
 	return (
 		<div className={style.dog}>
@@ -37,10 +29,6 @@ const Background = () => {
 				</div>
 			</Link>
 			<div className={style.tail}></div>
-
-			{/* <div id='imagen-container'>
-				<img id='imagen' src='ruta-a-tu-imagen.jpg' alt='Imagen' />
-			</div> */}
 		</div>
 	)
 }
