@@ -5,6 +5,7 @@ import axios from 'axios'
 
 const useFormHandlers = () => {
 	// Local States
+	const [allDogs, setAllDogs] = useState([])
 	const [selectedTemps, setSelectedTemps] = useState([])
 	const [inputs, setInputs] = useState({
 		name: '',
@@ -32,6 +33,18 @@ const useFormHandlers = () => {
 		origin: '',
 	})
 	const [disabledSubmit, setDisabledSubmit] = useState(true)
+
+	useEffect(() => {
+		const getDogs = async () => {
+			try {
+				const { data } = await axios('http://localhost:3001/dogs')
+				setAllDogs(data)
+			} catch (error) {
+				alert(error.message)
+			}
+		}
+		getDogs()
+	}, [])
 
 	useEffect(() => {
 		const requiredInputs = {
@@ -118,7 +131,10 @@ const useFormHandlers = () => {
 			origin,
 		} = inputs
 		const areErrorsEmpty = Object.values(errors).every(value => !value)
-		if (areErrorsEmpty) {
+
+		const allNames = allDogs.map(dog => dog.name.toLowerCase())
+
+		if (areErrorsEmpty && !allNames.includes(name.toLowerCase())) {
 			try {
 				const postDog = {
 					name,
@@ -165,9 +181,13 @@ const useFormHandlers = () => {
 				alert(error.message)
 			}
 		} else {
-			alert(
-				'Invalid entries for creation, make sure to fill in all fields and ensure they are error-free',
-			)
+			if (!areErrorsEmpty) {
+				alert(
+					'Invalid entries for creation, make sure to fill in all fields and ensure they are error-free',
+				)
+			} else {
+				alert(`The ${name} breed already exists`)
+			}
 		}
 	}
 
