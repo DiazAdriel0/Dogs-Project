@@ -54,26 +54,30 @@ const Create = () => {
 				</div>
 
 				<div className={style.inputs}>
-					<label>
-						Minimum Height<span>*</span>
-					</label>
-					<input
-						value={inputs.minImperialHeight}
-						name='minImperialHeight'
-						type='number'
-						placeholder='Min Height (Imperial)'
-						onChange={handleChange}
-					></input>
-					<label>
-						Maximum Height<span>*</span>
-					</label>
-					<input
-						value={inputs.maxImperialHeight}
-						name='maxImperialHeight'
-						type='number'
-						placeholder='Max Height (Imperial)'
-						onChange={handleChange}
-					></input>
+					<div>
+						<label>
+							Minimum Height<span>*</span>
+						</label>
+						<input
+							value={inputs.minImperialHeight}
+							name='minImperialHeight'
+							type='number'
+							placeholder='Min Height (Inches)'
+							onChange={handleChange}
+						></input>
+					</div>
+					<div>
+						<label>
+							Maximum Height<span>*</span>
+						</label>
+						<input
+							value={inputs.maxImperialHeight}
+							name='maxImperialHeight'
+							type='number'
+							placeholder='Max Height (Inches)'
+							onChange={handleChange}
+						></input>
+					</div>
 				</div>
 				<div className={style.errors}>
 					{errors.imperialHeight ? (
@@ -84,26 +88,30 @@ const Create = () => {
 				</div>
 
 				<div className={style.inputs}>
-					<label>
-						Minimum Weight<span>*</span>
-					</label>
-					<input
-						value={inputs.minImperialWeight}
-						name='minImperialWeight'
-						type='number'
-						placeholder='Min Weight (Imperial)'
-						onChange={handleChange}
-					></input>
-					<label>
-						Maximum Weight<span>*</span>
-					</label>
-					<input
-						value={inputs.maxImperialWeight}
-						name='maxImperialWeight'
-						type='number'
-						placeholder='Max Weight (Imperial)'
-						onChange={handleChange}
-					></input>
+					<div>
+						<label>
+							Minimum Weight<span>*</span>
+						</label>
+						<input
+							value={inputs.minImperialWeight}
+							name='minImperialWeight'
+							type='number'
+							placeholder='Min Weight (Lbs)'
+							onChange={handleChange}
+						></input>
+					</div>
+					<div>
+						<label>
+							Maximum Weight<span>*</span>
+						</label>
+						<input
+							value={inputs.maxImperialWeight}
+							name='maxImperialWeight'
+							type='number'
+							placeholder='Max Weight (Lbs)'
+							onChange={handleChange}
+						></input>
+					</div>
 				</div>
 				<div className={style.errors}>
 					{errors.imperialWeight ? (
@@ -114,26 +122,30 @@ const Create = () => {
 				</div>
 
 				<div className={style.inputs}>
-					<label>
-						Minimum Life Expectancy<span>*</span>
-					</label>
-					<input
-						value={inputs.minLifeSpan}
-						name='minLifeSpan'
-						type='number'
-						placeholder='Min Life Span (years)'
-						onChange={handleChange}
-					></input>
-					<label>
-						Maximum Life Expectancy<span>*</span>
-					</label>
-					<input
-						value={inputs.maxLifeSpan}
-						name='maxLifeSpan'
-						type='number'
-						placeholder='Max Life Span (years)'
-						onChange={handleChange}
-					></input>
+					<div>
+						<label>
+							Minimum Life Expectancy<span>*</span>
+						</label>
+						<input
+							value={inputs.minLifeSpan}
+							name='minLifeSpan'
+							type='number'
+							placeholder='Min Life Span (years)'
+							onChange={handleChange}
+						></input>
+					</div>
+					<div>
+						<label>
+							Maximum Life Expectancy<span>*</span>
+						</label>
+						<input
+							value={inputs.maxLifeSpan}
+							name='maxLifeSpan'
+							type='number'
+							placeholder='Max Life Span (years)'
+							onChange={handleChange}
+						></input>
+					</div>
 				</div>
 				<div className={style.errors}>
 					{errors.lifeSpan ? <span>{errors.lifeSpan}</span> : <span></span>}

@@ -13,7 +13,7 @@ const Nav = () => {
 					CREATE
 				</Link>
 				<Link className={style.link} to='/about'>
-					ABOUT US
+					ABOUT ME
 				</Link>
 			</div>
 		</div>

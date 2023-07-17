@@ -12,9 +12,18 @@
 	color: #fff;
 }
 
+.containerCreate h1 {
+	width: 20%;
+}
+
 .form {
 	display: flex;
 	flex-direction: column;
+	width: 70%;
+}
+
+.form label {
+	margin: 0 0.6rem;
 }
 
 .errors {
