@@ -19,12 +19,15 @@ const SearchBar = () => {
 			{/* It is enclosed within a form just so that when the user presses 'ENTER', the search is executed */}
 			<form onSubmit={handleClick}>
 				<input
+					className={style.searchInput}
 					type='search'
 					placeholder='Breed Search'
 					onChange={event => setSearch(event.target.value)}
 					value={search}
 				/>
-				<button type='submit'>Search</button>
+				<button className={style.searchButton} type='submit'>
+					Search
+				</button>
 			</form>
 		</div>
 	)

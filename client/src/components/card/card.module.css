@@ -1,8 +1,115 @@
-.containerCard {
-	display: flex;
+/* .containerCard {
+	background-color: #fce9c4;
+	font-size: 0.8rem;
 }
 
-.containerCard img {
-	width: 300px;
-	height: auto;
+.dogImg {
+	width: 270px;
+	height: 575px;
+	margin: 30px auto;
+	overflow: hidden;
+}
+
+.dogImg img {
+	border-radius: 50%;
+	width: 200px;
+	height: 200px;
+} */
+
+.contianer * {
+	/* resets the spacing between the card-head and card-body */
+	margin: 0;
+	padding: 0;
+	outline: none;
+}
+
+.container {
+	width: 270px;
+	height: 575px;
+	margin: 15px auto;
+}
+
+.card {
+	border-radius: 25px;
+	border: 1px solid #353535;
+	box-shadow: 11px 11px 1px rgba(0, 0, 0, 0.3);
+}
+
+.cardHead {
+	position: relative;
+	height: 265px;
+	background: linear-gradient(135deg, #43cea2, #185a9d);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	border-radius: 25px 25px 0 0;
+}
+
+.animalImg {
+	/*img is 150px because it would be to big for the card visually*/
+	width: 150px;
+	height: 150px;
+	border-radius: 25%;
+	box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.2);
+	margin: 10px;
+	object-fit: cover;
+	transition: transform 0.3s ease-in-out;
+}
+
+.animalImg:hover {
+	transform: scale(1.1);
+}
+
+.animalDetail {
+	padding: 15px;
+	font-size: 11px;
+	color: #fff;
+	text-align: center;
+}
+
+.animalDetail h2 {
+	font-size: 18px;
+	font-weight: 500;
+	letter-spacing: 2px;
+	padding-bottom: 10px;
+	text-transform: uppercase;
+	height: 20px;
+}
+
+.cardBody {
+	height: 260px;
+	background: #fff;
+	border-radius: 0 0 25px 25px;
+	border: 1px solid white;
+}
+
+.animalInfo h4 {
+	font-size: 12px;
+	padding: 0 21px;
+	margin-top: 15px;
+	padding-bottom: 10px;
+	text-transform: uppercase;
+}
+
+ul {
+	list-style: none;
+	font-size: 12px;
+	padding: 0 30px;
+}
+
+.labels {
+	font-weight: 700;
+	text-transform: uppercase;
+	color: #404040;
+}
+
+.animalDescription h4 {
+	font-size: 12px;
+	padding: 0 21px;
+	margin-top: 20px;
+	padding-bottom: 10px;
+	text-transform: uppercase;
+}
+
+.animalDescription p {
+	font-size: 0.8rem;
+	padding: 0 28px;
 }

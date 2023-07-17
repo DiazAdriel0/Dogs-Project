@@ -1,0 +1,37 @@
+.containerCreate {
+	display: flex;
+	gap: 5%;
+	justify-content: space-around;
+	align-items: center;
+	margin: 5rem 5rem;
+	padding: 5rem;
+	background: linear-gradient(135deg, #43cea2, #185a9d);
+	border-radius: 50px;
+	border: 1px solid #353535;
+	box-shadow: 11px 11px 1px rgba(0, 0, 0, 0.3);
+	color: #fff;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+}
+
+.errors {
+	color: #ff0000;
+	font-size: 0.8rem;
+	height: 1.5rem;
+}
+
+.requiredMessage {
+	font-size: 0.7rem;
+	color: #fff;
+}
+
+.temperaments {
+	color: #353535;
+}
+
+.temperamentsLabel {
+	color: #fff;
+}

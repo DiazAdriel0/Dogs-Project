@@ -9,7 +9,11 @@ const Pagination = () => {
 
 	return (
 		<div className={style.containerPagination}>
-			<button disabled={currentPage === 1} onClick={pagination.handleClickPrev}>
+			<button
+				disabled={currentPage === 1}
+				className={currentPage === 1 ? style.disabled : style.prevNextButtons}
+				onClick={pagination.handleClickPrev}
+			>
 				Prev
 			</button>
 
@@ -28,6 +32,11 @@ const Pagination = () => {
 
 			<button
 				disabled={currentPage === pagination.totalPages}
+				className={
+					currentPage === pagination.totalPages
+						? style.disabled
+						: style.prevNextButtons
+				}
 				onClick={pagination.handleClickNext}
 			>
 				Next

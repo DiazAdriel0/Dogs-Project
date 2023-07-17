@@ -8,6 +8,7 @@ import Landing from './views/landing/landing'
 import Home from './views/home/home'
 import Detail from './views/detail/detail'
 import Create from './views/create/create'
+import AboutUs from './views/about/aboutUs'
 
 function App() {
 	const location = useLocation()
@@ -20,6 +21,7 @@ function App() {
 				<Route exact path='/home' element={<Home />} />
 				<Route exact path='/detail/:id' element={<Detail />} />
 				<Route exact path='/create' element={<Create />} />
+				<Route exact path='/about' element={<AboutUs />} />
 			</Routes>
 		</div>
 	)

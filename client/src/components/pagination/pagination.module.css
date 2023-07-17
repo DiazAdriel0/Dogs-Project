@@ -1,6 +1,41 @@
 .containerPagination {
+	text-align: center;
+	margin: 3rem 0;
+}
+
+.pageButton {
+	border: none;
+	margin: 0 5px;
+	border-radius: 5px;
+	background-color: #f2f8fd;
+}
+
+.prevNextButtons {
+	border: none;
+	margin: 0 5px;
+	border-radius: 5px;
+	background-color: #f2f8fd;
+}
+
+.disabled {
+	border: none;
+	margin: 0 5px;
+	border-radius: 5px;
+	background-color: #f2f8fd;
+}
+
+.prevNextButtons:hover {
+	background-color: #92c4f3;
+}
+
+.pageButton:hover {
+	background-color: #92c4f3;
 }
 
 .currentPage {
-	background-color: red;
+	border: none;
+	transform: scale(1.3);
+	margin: 0 5px;
+	border-radius: 5px;
+	background-color: #92c4f3;
 }

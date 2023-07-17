@@ -29,11 +29,19 @@ const Home = () => {
 
 	return (
 		<div className={style.containerHome}>
-			<h1>Home</h1>
-			<button onClick={homeHandlers.handleClick}>Reset All Filters</button>
-			<SearchBar />
+			<div className={style.filters}>
+				<SearchBar />
 
-			<div>
+				<Select
+					className={style.orderSelect}
+					options={options.orderOptions}
+					values={selectedOrder}
+					onChange={homeHandlers.handleOrderChange}
+					clearable
+					placeholder='Order Dogs'
+					closeOnSelect
+				/>
+
 				{!homeHandlers.originError && (
 					<Select
 						className={style.originSelect}
@@ -45,16 +53,6 @@ const Home = () => {
 						closeOnSelect
 					/>
 				)}
-
-				<Select
-					className={style.orderSelect}
-					options={options.orderOptions}
-					values={selectedOrder}
-					onChange={homeHandlers.handleOrderChange}
-					clearable
-					placeholder='Order Dogs'
-					closeOnSelect
-				/>
 
 				{!homeHandlers.temperamentsError && (
 					<Select
@@ -68,6 +66,13 @@ const Home = () => {
 						closeOnSelect
 					/>
 				)}
+
+				<button
+					className={style.resetButton}
+					onClick={homeHandlers.handleClick}
+				>
+					Reset All Filters
+				</button>
 			</div>
 
 			<Pagination />

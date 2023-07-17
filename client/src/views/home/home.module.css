@@ -1,28 +1,40 @@
 .containerHome {
 	display: flex;
 	flex-direction: column;
+	margin: 3%;
 }
 
-.temperaments {
-	color: #000;
-}
-
-.originSelect {
-	background-color: #212121;
-	color: #ff6f00;
-}
-
-.orderSelect {
-	background-color: #212121;
+.filters {
+	height: 6rem;
+	width: 100%;
+	background-color: #c9e4fd;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	margin: 0;
 }
 
 .temperamentsSelect {
-	background-color: #212121;
+	font-size: 0.9rem;
 }
-paleta {
-	--color-primary: #ff6f00;
-	--color-secondary: #00796b;
-	--color-accent: #e91e63;
-	--color-neutral-1: #ffffff;
-	--color-neutral-2: #212121;
+
+.originSelect {
+	font-size: 0.9rem;
+}
+
+.orderSelect {
+	font-size: 0.9rem;
+}
+
+.resetButton {
+	margin-top: 1px;
+	padding: 5px 10px;
+	background-color: #92c4f3;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.resetButton:hover {
+	background-color: #e4f2ff;
 }

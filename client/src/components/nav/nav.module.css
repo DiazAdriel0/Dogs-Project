@@ -1,0 +1,51 @@
+.containerNav {
+	height: 5rem;
+	background-color: #c9e4fd;
+}
+
+.containerLinks {
+	height: 5rem;
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	color: #333333;
+}
+
+.link {
+	display: flex;
+	align-items: center;
+	height: 5rem;
+	padding: auto;
+	margin: auto;
+	text-decoration: none;
+	color: #333333;
+	text-shadow: 2px 2px 5px #36638d;
+	transition: transform 0.5s ease;
+}
+
+.link:hover {
+	transform: scale(1.1);
+}
+
+.homeLogo {
+	max-width: 100%;
+	max-height: 100%;
+	transform: scale(1.2);
+}
+
+.homeLogo:hover {
+	transform: scale(1.2) rotate(0);
+	animation: saludo 0.3s linear 1;
+}
+
+@keyframes saludo {
+	0% {
+		transform: rotate(-10deg);
+	}
+	50% {
+		transform: rotate(10deg);
+	}
+	100% {
+		transform: rotate(-10deg);
+	}
+}

@@ -1,0 +1,15 @@
+.containerSearchBar {
+}
+
+.searchButton {
+	margin: 1px 0 0 5px;
+	padding: 5px 10px;
+	background-color: #92c4f3;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.searchButton:hover {
+	background-color: #e4f2ff;
+}
