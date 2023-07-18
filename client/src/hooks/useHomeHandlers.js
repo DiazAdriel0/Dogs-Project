@@ -10,6 +10,7 @@ import {
 	setCurrentPage,
 	dogsFrom,
 } from '../redux/actions/actions'
+import axios from 'axios'
 
 const useHomeHandlers = () => {
 	// Global States
@@ -112,11 +113,30 @@ const useHomeHandlers = () => {
 		dispatch(setCurrentPage(1))
 	}
 
+	const handleDelete = (id, name) => {
+		const deleteDog = async id => {
+			try {
+				await axios.delete(`http://localhost:3001/dogs/${id}`)
+				handleClick()
+				alert("Dog deleted successfully :'(")
+			} catch (error) {
+				alert(error.message)
+			}
+		}
+
+		const confirmation = confirm(
+			`Are you sure you want to delete the "${name}" breed?`,
+		)
+
+		confirmation && deleteDog(id)
+	}
+
 	return {
 		handleTemperamentChange,
 		handleOrderChange,
 		handleFromChange,
 		handleClick,
+		handleDelete,
 		setSelectedOriginOptions,
 		setSelectedOrderOptions,
 		setSelectedTempOptions,

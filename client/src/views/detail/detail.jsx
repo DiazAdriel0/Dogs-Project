@@ -1,27 +1,23 @@
 /* eslint-disable camelcase */
 import style from './detail.module.css'
-import { useParams } from 'react-router-dom'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+import errorImage from './../../assets/dog-poop-icon.png'
+import Select from 'react-dropdown-select'
+import useOptions from '../../hooks/useOptions'
+import useDetailFunctions from './utils/useDetailFunctions'
+import { Link } from 'react-router-dom'
 
 const Detail = () => {
-	const [dog, setDog] = useState({})
-	const [error, setError] = useState(false)
-	const { id } = useParams()
+	const options = useOptions()
 
-	const request = async () => {
-		try {
-			const { data } = await axios(`http://localhost:3001/dogs/${id}`)
-			setDog(data)
-		} catch (error) {
-			setError(true)
-			alert('No breed matches the searched id')
-		}
-	}
-
-	useEffect(() => {
-		request()
-	}, [])
+	const {
+		dog,
+		error,
+		addTempermanet,
+		selectedTemp,
+		handleAddTempClick,
+		handleChange,
+		handleClick,
+	} = useDetailFunctions()
 
 	const {
 		name,
@@ -43,11 +39,17 @@ const Detail = () => {
 						<img
 							className={style.image}
 							src={image?.url}
-							alt={`${dog.name} image`}
+							alt={`${name} image`}
 						/>
 					</div>
 					<div className={style.infoContainer}>
-						<h3 className={style.name}>{name}</h3>
+						<Link
+							to={`https://www.google.com/search?q=${dog.name}+breed+of+dog`}
+							target='_blank'
+							className={style.link}
+						>
+							<h3 className={style.name}>{name}</h3>{' '}
+						</Link>
 						<div>
 							{weight?.imperial && <h5>Imperial Weight: {weight?.imperial}</h5>}
 							{weight?.metric && <h5>Metric Weight: {weight?.metric}</h5>}
@@ -60,11 +62,37 @@ const Detail = () => {
 						{breed_group && <h5>Breed Group: {breed_group}</h5>}
 						{life_span && <h5>Life Span: {life_span}</h5>}
 						{temperament && <h5>Temperaments: {temperament}</h5>}
+						{typeof dog.id !== 'number' && !addTempermanet && (
+							<button className={style.button} onClick={handleAddTempClick}>
+								Add Temperament
+							</button>
+						)}
+						{addTempermanet && (
+							<div>
+								<Select
+									className={style.temperamentsSelect}
+									options={options.temperamentsOptions}
+									values={selectedTemp}
+									onChange={handleChange}
+									clearable
+									placeholder='Temperaments'
+									closeOnSelect
+								/>
+								<button className={style.button} onClick={handleClick}>
+									Add
+								</button>
+							</div>
+						)}
 						{origin && <h5>Origin: {origin}</h5>}
 					</div>
 				</div>
 			)}
-			{error && <p>Error</p>}
+			{error && (
+				<div>
+					<p>Error</p>
+					<img src={errorImage} alt='Error' />
+				</div>
+			)}
 		</>
 	)
 }

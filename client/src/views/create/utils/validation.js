@@ -4,7 +4,7 @@ const validation = inputs => {
 	const heightRegex = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/
 	const weightRegex = /^(?:[1-9]|[1-9][0-9]|[1-2][0-9]{2}|3[0-4][0-9]|350)$/
 	const lifeSpanRegex = /^(?:[1-9]|1[0-9]|2[0-5])$/
-	const temperamentsRegex = /^(\w+,\s)+\w+$/
+	const temperamentsRegex = /^(\w+\s*,\s*){1,9}\w+\s*,?$/
 	const imageUrlRegex = /^(https?:\/\/)?[\w.-]+\.[a-zA-Z]{2,}(\/\S*)?$/
 	const bredForRegex = /^.{5,}$/
 	const breedGroupRegex = /^.{3,}$/
@@ -69,7 +69,7 @@ const validation = inputs => {
 	)
 		errors = {
 			...errors,
-			temperamentsSelect: 'You must select at least 2 temperaments',
+			temperamentsSelect: 'You can only select between 2 and 10 temperaments',
 		}
 
 	if (inputs.imageUrl && !imageUrlRegex.test(inputs.imageUrl))

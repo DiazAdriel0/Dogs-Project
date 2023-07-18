@@ -35,3 +35,28 @@
 .name {
 	font-size: 2rem;
 }
+
+.button {
+	border: 1px solid #fff;
+	color: #fff;
+	margin-top: 1px;
+	padding: 5px 10px;
+	background-color: transparent;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.temperamentsSelect {
+	font-size: 0.9rem;
+	color: #333333;
+}
+
+.button:hover {
+	color: #333333;
+	background-color: #e4f2ff;
+}
+
+.link {
+	text-decoration: none;
+	color: #fff;
+}

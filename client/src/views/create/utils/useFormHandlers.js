@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import validation from './validation'
 import axios from 'axios'
+import useHomeHandlers from '../../../hooks/useHomeHandlers'
 
 const useFormHandlers = () => {
 	// Local States
@@ -33,6 +34,7 @@ const useFormHandlers = () => {
 		origin: '',
 	})
 	const [disabledSubmit, setDisabledSubmit] = useState(true)
+	const homeHandlers = useHomeHandlers()
 
 	useEffect(() => {
 		const getDogs = async () => {
@@ -175,7 +177,7 @@ const useFormHandlers = () => {
 					origin: '',
 				})
 				setSelectedTemps([])
-
+				homeHandlers.handleClick()
 				alert(`The ${data.name} breed was created successfully`)
 			} catch (error) {
 				alert(error.message)
