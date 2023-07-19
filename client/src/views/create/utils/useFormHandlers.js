@@ -8,6 +8,7 @@ const useFormHandlers = () => {
 	// Local States
 	const [allDogs, setAllDogs] = useState([])
 	const [selectedTemps, setSelectedTemps] = useState([])
+	const [reset, setReset] = useState(false)
 	const [inputs, setInputs] = useState({
 		name: '',
 		minImperialHeight: '',
@@ -35,6 +36,10 @@ const useFormHandlers = () => {
 	})
 	const [disabledSubmit, setDisabledSubmit] = useState(true)
 	const homeHandlers = useHomeHandlers()
+
+	useEffect(() => {
+		setReset(false)
+	}, [reset])
 
 	useEffect(() => {
 		const getDogs = async () => {
@@ -65,7 +70,6 @@ const useFormHandlers = () => {
 		const areRequiredInputsEmpty = Object.values(requiredInputs).every(
 			value => value,
 		)
-
 		if (areRequiredInputsEmpty) {
 			setDisabledSubmit(false)
 		} else {
@@ -92,6 +96,7 @@ const useFormHandlers = () => {
 		setSelectedTemps(selected)
 		if (selected.length) {
 			const selectedString = selected.map(option => option.value).join(', ')
+
 			setInputs({
 				...inputs,
 				temperamentsSelect: selectedString,
@@ -178,6 +183,7 @@ const useFormHandlers = () => {
 				})
 				setSelectedTemps([])
 				homeHandlers.handleClick()
+				setReset(true)
 				alert(`The ${data.name} breed was created successfully`)
 			} catch (error) {
 				alert(error.message)
@@ -198,6 +204,7 @@ const useFormHandlers = () => {
 		inputs,
 		errors,
 		disabledSubmit,
+		reset,
 		handleChange,
 		handleTemperamentChange,
 		handleSubmit,

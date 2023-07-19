@@ -1,7 +1,7 @@
 import style from './create.module.css'
-import Select from 'react-dropdown-select'
 import useOptions from './../../hooks/useOptions'
 import useFormHandlers from './utils/useFormHandlers'
+import SelectMaster from '../../components/Select/select'
 
 const Create = () => {
 	const options = useOptions()
@@ -11,6 +11,7 @@ const Create = () => {
 		inputs,
 		errors,
 		disabledSubmit,
+		reset,
 		handleChange,
 		handleTemperamentChange,
 		handleSubmit,
@@ -155,16 +156,15 @@ const Create = () => {
 					<label className={style.temperamentsLabel}>
 						Temperaments<span>*</span>
 					</label>
-					<Select
+					<SelectMaster
 						className={style.temperamentsSelect}
 						options={options?.temperamentsOptions}
 						name='temperamentsSelect'
 						values={selectedTemps}
 						onChange={handleTemperamentChange}
-						multi
-						clearable
+						multi={true}
 						placeholder='Temperaments'
-						closeOnSelect
+						reset={reset}
 					/>
 				</div>
 				<div className={style.errors}>

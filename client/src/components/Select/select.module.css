@@ -1,0 +1,191 @@
+/* .containerSelect {
+	padding: 12px;
+	display: flex;
+	border: 1px solid #ddd;
+}
+
+.containerButton {
+	display: flex;
+	align-items: center;
+	background-color: red;
+	border: none;
+	width: 100%;
+}
+
+.containerSelect:hover {
+	border: 1px solid #329cff;
+}
+
+.input {
+	position: relative;
+	background-color: black;
+	border: none;
+	z-index: 4;
+	width: 95%;
+}
+
+.input:focus {
+	outline: none;
+}
+
+.select {
+	flex: 1;
+	position: relative;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	margin-top: 10px;
+}
+
+.select:focus {
+	outline: none;
+}
+
+.arrowIcon {
+	position: relative;
+	right: 5px;
+	width: 10px;
+	height: 10px;
+	cursor: pointer;
+	z-index: 3;
+}
+
+.closeImage {
+	position: relative;
+	right: 5px;
+	width: 10px;
+	height: 10px;
+	cursor: pointer;
+	z-index: 3;
+}
+
+.closeButton {
+	background-color: transparent;
+	border: none;
+	margin-right: 10px;
+}
+
+.selectedOptions {
+	display: flex;
+	width: fit-content;
+	background-color: #329cff;
+	align-items: center;
+}
+
+.closeImageOption {
+	position: relative;
+	right: 5px;
+	width: 10px;
+	height: 10px;
+	cursor: pointer;
+	z-index: 3;
+	margin-left: 5px;
+}
+
+.optionName {
+	margin: 3px 5px;
+} */
+
+.containerSelect {
+	display: flex;
+	align-items: center;
+	position: relative;
+	border: 1px solid #ddd;
+	padding: 12px;
+}
+
+.containerButton {
+	display: flex;
+	align-items: center;
+	background-color: transparent;
+	border: none;
+	width: 100%;
+}
+
+.select {
+	position: absolute;
+	width: 100%;
+	top: 80%;
+	left: 0;
+	z-index: 10;
+}
+
+.containerSelect:hover .select {
+	display: block;
+}
+
+.select {
+	display: none;
+	padding: 10px;
+}
+
+.input {
+	position: relative;
+	background-color: transparent;
+	border: none;
+	z-index: 4;
+	width: 95%;
+	margin: 0 10px;
+	padding: 5px 0;
+}
+
+.input:focus {
+	outline: none;
+}
+
+.arrowIcon {
+	position: relative;
+	right: 5px;
+	width: 10px;
+	height: 10px;
+	cursor: pointer;
+	z-index: 3;
+}
+
+.closeImage {
+	position: relative;
+	right: 5px;
+	width: 10px;
+	height: 10px;
+	cursor: pointer;
+	z-index: 3;
+}
+
+.closeButton {
+	background-color: transparent;
+	border: none;
+	margin-right: 10px;
+}
+
+.selectedOptions {
+	display: flex;
+	border-radius: 2px;
+	width: fit-content;
+	background-color: #329cff;
+	align-items: center;
+	margin: 2px;
+}
+
+.closeImageOption {
+	position: relative;
+	right: 5px;
+	width: 10px;
+	height: 10px;
+	cursor: pointer;
+	z-index: 3;
+	margin-left: 5px;
+}
+
+.optionName {
+	margin: 3px 5px;
+}
+
+.selectPlaceholder {
+	color: #ccc;
+}
+
+.option {
+	margin: 5px;
+}

@@ -23,10 +23,10 @@ const useHomeHandlers = () => {
 	const [selectedOriginOptions, setSelectedOriginOptions] = useState([])
 	// eslint-disable-next-line no-unused-vars
 	const [selectedOrderOptions, setSelectedOrderOptions] = useState([])
-	// eslint-disable-next-line no-unused-vars
 	const [selectedTempOptions, setSelectedTempOptions] = useState([])
 	const [originError, setOriginError] = useState(false)
 	const [temperamentsError, setTemperamentsError] = useState(false)
+	const [reset, setReset] = useState(false)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -36,6 +36,10 @@ const useHomeHandlers = () => {
 		setOriginError(false)
 		setTemperamentsError(false)
 	}, [originError, temperamentsError])
+
+	useEffect(() => {
+		setReset(false)
+	}, [reset])
 
 	// Handlers
 	const handleFromChange = selected => {
@@ -58,10 +62,11 @@ const useHomeHandlers = () => {
 				dispatch(dogsFrom('clear'))
 			}
 		} catch (error) {
-			alert(error.message)
+			// alert(error.message)
 			setOriginError(true)
 			setSelectedOriginOptions([])
 			dispatch(setSelectedOrigin([]))
+			throw new Error(error.message)
 		}
 	}
 
@@ -93,12 +98,13 @@ const useHomeHandlers = () => {
 				dispatch(filterByTemperament([]))
 			}
 		} catch (error) {
-			alert(error.message)
 			setTemperamentsError(true)
 			selected = selected.slice(0, selected.length - 1)
+			setSelectedTempOptions(selected)
 			const selectedArray = selected.map(option => option.value)
 			dispatch(setSelectedTemperaments(selected))
 			dispatch(filterByTemperament(selectedArray))
+			throw new Error(error.message)
 		}
 	}
 
@@ -111,13 +117,13 @@ const useHomeHandlers = () => {
 		dispatch(setSelectedOrigin([]))
 		setSelectedOriginOptions([])
 		dispatch(setCurrentPage(1))
+		setReset(true)
 	}
 
 	const handleDelete = (id, name) => {
 		const deleteDog = async id => {
 			try {
 				await axios.delete(`http://localhost:3001/dogs/${id}`)
-				handleClick()
 				alert("Dog deleted successfully :'(")
 			} catch (error) {
 				alert(error.message)
@@ -127,7 +133,7 @@ const useHomeHandlers = () => {
 		const confirmation = confirm(
 			`Are you sure you want to delete the "${name}" breed?`,
 		)
-
+		confirmation && handleClick()
 		confirmation && deleteDog(id)
 	}
 
@@ -142,6 +148,8 @@ const useHomeHandlers = () => {
 		setSelectedTempOptions,
 		originError,
 		temperamentsError,
+		selectedTempOptions,
+		reset,
 	}
 }
 

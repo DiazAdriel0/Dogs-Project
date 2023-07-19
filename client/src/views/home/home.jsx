@@ -3,12 +3,12 @@ import Cards from '../../components/cards/cards'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { getAllDogs } from '../../redux/actions/actions'
-import Select from 'react-dropdown-select'
 import SearchBar from '../../components/searchBar/searchBar'
 import Pagination from '../../components/pagination/pagination'
 import useHomeHandlers from '../../hooks/useHomeHandlers'
 import useOptions from '../../hooks/useOptions'
 import usePagination from '../../hooks/usePagination'
+import SelectMaster from '../../components/Select/select'
 
 const Home = () => {
 	// Global states
@@ -32,7 +32,7 @@ const Home = () => {
 			<div className={style.filters}>
 				<SearchBar />
 
-				<Select
+				{/* <Select
 					className={style.orderSelect}
 					options={options.orderOptions}
 					values={selectedOrder}
@@ -40,9 +40,19 @@ const Home = () => {
 					clearable
 					placeholder='Order Dogs'
 					closeOnSelect
+				/> */}
+				<SelectMaster
+					className={style.orderSelect}
+					options={options.orderOptions}
+					multi={false}
+					values={selectedOrder}
+					onChange={homeHandlers.handleOrderChange}
+					placeholder='Order Dogs'
+					/* onReset={homeHandlers.handleClick} */
+					reset={homeHandlers.reset}
 				/>
 
-				{!homeHandlers.originError && (
+				{/* {!homeHandlers.originError && (
 					<Select
 						className={style.originSelect}
 						options={options.originOptions}
@@ -52,9 +62,19 @@ const Home = () => {
 						placeholder='Origin of Dogs'
 						closeOnSelect
 					/>
-				)}
+				)} */}
+				<SelectMaster
+					className={style.originSelect}
+					options={options.originOptions}
+					multi={false}
+					values={selectedOrigin}
+					onChange={homeHandlers.handleFromChange}
+					placeholder='Origin of Dogs'
+					/* onReset={homeHandlers.handleClick} */
+					reset={homeHandlers.reset}
+				/>
 
-				{!homeHandlers.temperamentsError && (
+				{/* !homeHandlers.temperamentsError && (
 					<Select
 						className={style.temperamentsSelect}
 						options={options.temperamentsOptions}
@@ -65,7 +85,17 @@ const Home = () => {
 						placeholder='Temperaments'
 						closeOnSelect
 					/>
-				)}
+				) */}
+				<SelectMaster
+					className={style.temperamentsSelect}
+					options={options.temperamentsOptions}
+					multi={true}
+					values={selectedTemperaments}
+					onChange={homeHandlers.handleTemperamentChange}
+					placeholder='Temperaments'
+					/* onReset={homeHandlers.handleClick} */
+					reset={homeHandlers.reset}
+				/>
 
 				<button
 					className={style.resetButton}
