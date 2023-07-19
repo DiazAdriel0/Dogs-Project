@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import useHomeHandlers from './../../hooks/useHomeHandlers'
 
 const Card = props => {
-	const { dog } = props
+	const { dog, onReset } = props
 	const { handleDelete } = useHomeHandlers()
 	return (
 		<div className={style.container}>
@@ -46,7 +46,10 @@ const Card = props => {
 						<div className={style.deleteButtonContainer}>
 							<button
 								className={style.deleteButton}
-								onClick={() => handleDelete(dog.id, dog.name)}
+								onClick={() => {
+									handleDelete(dog.id, dog.name)
+									onReset()
+								}}
 							>
 								Delete Dog
 							</button>

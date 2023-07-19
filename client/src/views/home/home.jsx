@@ -1,7 +1,7 @@
 import style from './home.module.css'
 import Cards from '../../components/cards/cards'
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { getAllDogs } from '../../redux/actions/actions'
 import SearchBar from '../../components/searchBar/searchBar'
 import Pagination from '../../components/pagination/pagination'
@@ -23,44 +23,58 @@ const Home = () => {
 	const pagination = usePagination()
 	const dispatch = useDispatch()
 
+	const [reset, setReset] = useState(false)
+
+	useEffect(() => {
+		setReset(false)
+	}, [reset])
+
 	useEffect(() => {
 		if (!allDogs.length) dispatch(getAllDogs())
 	}, [])
+
+	const handleReset = () => {
+		setReset(true)
+	}
 
 	return (
 		<div className={style.containerHome}>
 			<div className={style.filters}>
 				<SearchBar />
 
-				<SelectMaster
-					className={style.orderSelect}
-					options={options.orderOptions}
-					multi={false}
-					values={selectedOrder}
-					onChange={homeHandlers.handleOrderChange}
-					placeholder='Order Dogs'
-					reset={homeHandlers.reset}
-				/>
+				{!reset && (
+					<>
+						<SelectMaster
+							className={style.orderSelect}
+							options={options.orderOptions}
+							multi={false}
+							values={selectedOrder}
+							onChange={homeHandlers.handleOrderChange}
+							placeholder='Order Dogs'
+							reset={homeHandlers.reset}
+						/>
 
-				<SelectMaster
-					className={style.originSelect}
-					options={options.originOptions}
-					multi={false}
-					values={selectedOrigin}
-					onChange={homeHandlers.handleFromChange}
-					placeholder='Origin of Dogs'
-					reset={homeHandlers.reset}
-				/>
+						<SelectMaster
+							className={style.originSelect}
+							options={options.originOptions}
+							multi={false}
+							values={selectedOrigin}
+							onChange={homeHandlers.handleFromChange}
+							placeholder='Origin of Dogs'
+							reset={homeHandlers.reset}
+						/>
 
-				<SelectMaster
-					className={style.temperamentsSelect}
-					options={options.temperamentsOptions}
-					multi={true}
-					values={selectedTemperaments}
-					onChange={homeHandlers.handleTemperamentChange}
-					placeholder='Temperaments'
-					reset={homeHandlers.reset}
-				/>
+						<SelectMaster
+							className={style.temperamentsSelect}
+							options={options.temperamentsOptions}
+							multi={true}
+							values={selectedTemperaments}
+							onChange={homeHandlers.handleTemperamentChange}
+							placeholder='Temperaments'
+							reset={homeHandlers.reset}
+						/>
+					</>
+				)}
 
 				<button
 					className={style.resetButton}
@@ -71,7 +85,7 @@ const Home = () => {
 			</div>
 
 			<Pagination />
-			<Cards allDogs={pagination.currentPageDogs} />
+			<Cards allDogs={pagination.currentPageDogs} onReset={handleReset} />
 			<Pagination />
 		</div>
 	)
