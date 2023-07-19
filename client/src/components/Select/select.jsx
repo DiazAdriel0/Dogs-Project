@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
 import style from './select.module.css'
 import closeButton from './../../assets/close-button.svg'
-import { useEffect, useState } from 'react'
 import useSelectMaster from '../../hooks/useSelectMaster'
 
 const SelectMaster = props => {
@@ -35,7 +33,14 @@ const SelectMaster = props => {
 							</div>
 					  ))
 					: (selectedValues.length || <span></span>) && (
-							<span>{selectedValues[0]?.value}</span>
+							<div
+								className={style.selectedsingleOptions}
+								key={selectedValues[0]?.value}
+							>
+								<span className={style.singleOption}>
+									{selectedValues[0]?.value}
+								</span>
+							</div>
 					  )}
 				<input
 					type='text'

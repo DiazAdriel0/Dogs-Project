@@ -300,18 +300,3 @@
 		transform: rotate(40deg);
 	}
 }
-
-/* Ball */
-
-#imagen-container {
-	position: relative;
-}
-
-#imagen {
-	transition: transform 0.3s ease-out;
-	cursor: pointer;
-}
-
-#imagen.clicked {
-	transform: translateY(10px);
-}

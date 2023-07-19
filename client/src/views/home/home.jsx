@@ -32,15 +32,6 @@ const Home = () => {
 			<div className={style.filters}>
 				<SearchBar />
 
-				{/* <Select
-					className={style.orderSelect}
-					options={options.orderOptions}
-					values={selectedOrder}
-					onChange={homeHandlers.handleOrderChange}
-					clearable
-					placeholder='Order Dogs'
-					closeOnSelect
-				/> */}
 				<SelectMaster
 					className={style.orderSelect}
 					options={options.orderOptions}
@@ -48,21 +39,9 @@ const Home = () => {
 					values={selectedOrder}
 					onChange={homeHandlers.handleOrderChange}
 					placeholder='Order Dogs'
-					/* onReset={homeHandlers.handleClick} */
 					reset={homeHandlers.reset}
 				/>
 
-				{/* {!homeHandlers.originError && (
-					<Select
-						className={style.originSelect}
-						options={options.originOptions}
-						values={selectedOrigin}
-						onChange={homeHandlers.handleFromChange}
-						clearable
-						placeholder='Origin of Dogs'
-						closeOnSelect
-					/>
-				)} */}
 				<SelectMaster
 					className={style.originSelect}
 					options={options.originOptions}
@@ -70,22 +49,9 @@ const Home = () => {
 					values={selectedOrigin}
 					onChange={homeHandlers.handleFromChange}
 					placeholder='Origin of Dogs'
-					/* onReset={homeHandlers.handleClick} */
 					reset={homeHandlers.reset}
 				/>
 
-				{/* !homeHandlers.temperamentsError && (
-					<Select
-						className={style.temperamentsSelect}
-						options={options.temperamentsOptions}
-						values={selectedTemperaments}
-						onChange={homeHandlers.handleTemperamentChange}
-						multi
-						clearable
-						placeholder='Temperaments'
-						closeOnSelect
-					/>
-				) */}
 				<SelectMaster
 					className={style.temperamentsSelect}
 					options={options.temperamentsOptions}
@@ -93,7 +59,6 @@ const Home = () => {
 					values={selectedTemperaments}
 					onChange={homeHandlers.handleTemperamentChange}
 					placeholder='Temperaments'
-					/* onReset={homeHandlers.handleClick} */
 					reset={homeHandlers.reset}
 				/>
 

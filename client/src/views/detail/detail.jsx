@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import style from './detail.module.css'
 import errorImage from './../../assets/dog-poop-icon.png'
-import Select from 'react-dropdown-select'
+import SelectMaster from './../../components/Select/select'
 import useOptions from '../../hooks/useOptions'
 import useDetailFunctions from './utils/useDetailFunctions'
 import { Link } from 'react-router-dom'
@@ -69,14 +69,12 @@ const Detail = () => {
 						)}
 						{addTempermanet && (
 							<div>
-								<Select
+								<SelectMaster
 									className={style.temperamentsSelect}
 									options={options.temperamentsOptions}
 									values={selectedTemp}
 									onChange={handleChange}
-									clearable
 									placeholder='Temperaments'
-									closeOnSelect
 								/>
 								<button className={style.button} onClick={handleClick}>
 									Add

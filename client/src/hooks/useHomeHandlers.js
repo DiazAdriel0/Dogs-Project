@@ -62,7 +62,6 @@ const useHomeHandlers = () => {
 				dispatch(dogsFrom('clear'))
 			}
 		} catch (error) {
-			// alert(error.message)
 			setOriginError(true)
 			setSelectedOriginOptions([])
 			dispatch(setSelectedOrigin([]))

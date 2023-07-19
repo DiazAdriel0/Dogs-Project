@@ -24,10 +24,7 @@ body {
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	/* Agrego */
-	/* background-color: #313352; */
 	background-color: #e4f2ff;
-	/* background-color: #fdf6e3; ultimo que puse*/
 	color: #333333;
 	width: 100%;
 	height: 100%;
@@ -37,15 +34,3 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 		monospace;
 }
-
-/* paleta definitiva {
-	--fondo: #fdf6e3;
-	--diferencia-con-fondo: #fce9c4;
-	--texto: #333333;
-	--hover: #555555;
-	--color-primary: #ff6f00; (naranja)
-	--color-secondary: #00796b; (verde)
-	--color-accent: #e91e63; (rosa)
-	--color-neutral-1: #ffffff;
-	--color-neutral-2: #212121;
-} */

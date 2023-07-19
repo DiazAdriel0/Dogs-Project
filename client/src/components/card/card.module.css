@@ -1,5 +1,4 @@
 .contianer * {
-	/* resets the spacing between the card-head and card-body */
 	margin: 0;
 	padding: 0;
 	outline: none;
@@ -21,12 +20,10 @@
 	position: relative;
 	height: 265px;
 	background: linear-gradient(135deg, #43cea2, #185a9d);
-	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	border-radius: 25px 25px 0 0;
 }
 
 .animalImg {
-	/*img is 150px because it would be to big for the card visually*/
 	width: 150px;
 	height: 150px;
 	border-radius: 25%;
