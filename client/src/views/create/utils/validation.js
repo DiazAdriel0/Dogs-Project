@@ -1,6 +1,6 @@
 const validation = inputs => {
 	let errors = {}
-	const nameRegex = /^[A-Z][a-zA-Z\s-]{2,}$/
+	const nameRegex = /^[A-Z][a-zA-Z]*(?:[ -][a-zA-Z]+)*$/
 	const heightRegex = /^(?:[1-9]|[1-3][0-9]|4[0-5])$/
 	const weightRegex = /^(?:[1-9]|[1-9][0-9]|[1-2][0-9]{2}|3[0-4][0-9]|350)$/
 	const lifeSpanRegex = /^(?:[1-9]|1[0-9]|2[0-5])$/
