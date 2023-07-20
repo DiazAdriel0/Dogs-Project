@@ -25,7 +25,7 @@ const postDog = async (req, res) => {
       origin,
     };
 
-    const tempsArray = temperament
+    const tempsArray = await temperament
       .split(",")
       .map((temperament) => temperament.trim());
 
@@ -33,7 +33,6 @@ const postDog = async (req, res) => {
 
     res.status(200).json(createdDog);
   } catch (error) {
-    console.error(error);
     res.status(400).json({ error: error.message });
   }
 };
