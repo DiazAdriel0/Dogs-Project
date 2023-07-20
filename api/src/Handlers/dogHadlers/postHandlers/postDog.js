@@ -28,12 +28,13 @@ const postDog = async (req, res) => {
     const tempsArray = temperament
       .split(",")
       .map((temperament) => temperament.trim());
-
+    console.log(newDog);
+    console.log(tempsArray);
     const createdDog = await createDog(newDog, tempsArray);
 
     res.status(200).json(createdDog);
   } catch (error) {
-    res.status(400).json(error.message);
+    res.status(400).json({ error: error.message });
   }
 };
 

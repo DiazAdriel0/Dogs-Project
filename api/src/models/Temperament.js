@@ -12,6 +12,17 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
+      validate: {
+        isNameValid(value) {
+          const nameRegex = /^[A-Z][a-zA-Z]*(?:[ -][a-zA-Z]+)*$/;
+          if (!nameRegex.test(value)) {
+            throw new Error(
+              "The 'name' property does not meet the required format"
+            );
+          }
+        },
+      },
     },
   });
 };

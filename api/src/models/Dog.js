@@ -11,19 +11,65 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: DataTypes.UUIDV4,
       },
+
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
+        validate: {
+          isNameValid(value) {
+            const nameRegex = /^[A-Z][a-zA-Z]*(?:[ -][a-zA-Z]+)*$/;
+            if (!nameRegex.test(value)) {
+              throw new Error(
+                "The 'name' property does not meet the required format"
+              );
+            }
+          },
+        },
       },
+
       bred_for: {
         type: DataTypes.STRING,
+        validate: {
+          isBredForValid(value) {
+            const bredForRegex = /^.{5,}$/;
+            if (value && !bredForRegex.test(value)) {
+              throw new Error(
+                "The 'bred_for' property does not meet the required format"
+              );
+            }
+          },
+        },
       },
+
       breed_group: {
         type: DataTypes.STRING,
+        validate: {
+          isBreedGroupValid(value) {
+            const breedGroupRegex = /^.{3,}$/;
+            if (value && !breedGroupRegex.test(value)) {
+              throw new Error(
+                "The 'breed_group' property does not meet the required format"
+              );
+            }
+          },
+        },
       },
+
       origin: {
         type: DataTypes.STRING,
+        validate: {
+          isOriginValid(value) {
+            const originRegex = /^[^\d,]+\s*,\s*[^\d,]+$/;
+            if (value && !originRegex.test(value)) {
+              throw new Error(
+                "The 'origin' property does not meet the required format"
+              );
+            }
+          },
+        },
       },
+
       image: {
         type: DataTypes.JSON,
         allowNull: false,
@@ -32,9 +78,18 @@ module.exports = (sequelize) => {
             if (!value.url) {
               throw new Error('The "image" object must have "url" property.');
             }
+
+            const imageUrlRegex =
+              /^(https?:\/\/)?[\w.-]+\.[a-zA-Z]{2,}(\/\S*)?$/;
+            if (!imageUrlRegex.test(value.url)) {
+              throw new Error(
+                "The 'url' property does not meet the required format"
+              );
+            }
           },
         },
       },
+
       height: {
         type: DataTypes.JSON,
         allowNull: false,
@@ -56,6 +111,7 @@ module.exports = (sequelize) => {
           },
         },
       },
+
       weight: {
         type: DataTypes.JSON,
         allowNull: false,
@@ -77,11 +133,23 @@ module.exports = (sequelize) => {
           },
         },
       },
+
       life_span: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          isLifeSpanValid(value) {
+            const regex = /^\d+ - \d+$/;
+            if (!regex.test(value)) {
+              throw new Error(
+                "The 'life_span' property does not meet the required format"
+              );
+            }
+          },
+        },
       },
     },
+
     { timestamps: false }
   );
 };
