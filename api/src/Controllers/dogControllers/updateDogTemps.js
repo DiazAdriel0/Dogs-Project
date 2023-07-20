@@ -7,14 +7,13 @@ const updateDogTemps = async (id, temperament) => {
     });
     if (!foundTempermant) throw new Error("Temperament not found");
 
-    const perro = await Dog.findByPk(id);
+    const dog = await Dog.findByPk(id);
 
-    if (!perro) {
-      throw new Error("Dog not found");
-    }
+    if (!dog) throw new Error("Dog not found");
 
-    const updatedDog = await perro.addTemperament(foundTempermant);
-    console.log(updatedDog);
+    const updatedDog = await dog.addTemperament(foundTempermant);
+
+    if (!updatedDog) throw new Error("Repeated temperaments cannot be added");
 
     return updatedDog;
   } catch (error) {

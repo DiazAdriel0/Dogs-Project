@@ -4,8 +4,7 @@ const updateDog = async (req, res) => {
   try {
     const { temperament } = req.body;
     const { idDog } = req.params;
-    console.log(temperament);
-    console.log(idDog);
+
     const updatedDog = await updateDogTemps(idDog, temperament);
 
     console.log(updatedDog);

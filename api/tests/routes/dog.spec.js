@@ -10,7 +10,9 @@ const agent = session(app);
 const dog = {
   id: "550e8400-e29b-41d4-a716-446655440000",
   name: "Pug",
-  image: { url: "https://asdasdasdjhakjshda" },
+  image: {
+    url: "https://ichef.bbci.co.uk/news/640/cpsprodpb/14EC6/production/_124820758_pug1.jpg",
+  },
   weight: { imperial: "4 - 5", metric: "4 - 5" },
   height: { imperial: "4 - 5", metric: "4 - 5" },
   life_span: "8 - 10",
@@ -104,9 +106,22 @@ describe("GET /dogs with params :idDog", () => {
 
 describe("POST /dogs", () => {
   it("Debería retornar con status 200 un objeto con las propiedades name, image, weight, height, life_span, bred_for, breed_group y origin", (done) => {
+    const newDog = {
+      name: "New Pug",
+      image: {
+        url: "https://ichef.bbci.co.uk/news/640/cpsprodpb/14EC6/production/_124820758_pug1.jpg",
+      },
+      weight: { imperial: "4 - 5", metric: "4 - 5" },
+      height: { imperial: "4 - 5", metric: "4 - 5" },
+      life_span: "8 - 10",
+      temperament: "Agile, Alert",
+      bred_for: "Anything",
+      breed_group: "Anything",
+      origin: "Anything, Anything",
+    };
     request(app)
       .post("/dogs")
-      .send(dog)
+      .send(newDog)
       .end((err, res) => {
         assert.equal(res.status, 200, "El código de estado HTTP no es 200");
 
@@ -172,4 +187,8 @@ describe("POST /dogs", () => {
         done();
       });
   });
+});
+
+describe("GET /temperaments", () => {
+  it("should get 200", () => agent.get("/temperaments").expect(200));
 });
