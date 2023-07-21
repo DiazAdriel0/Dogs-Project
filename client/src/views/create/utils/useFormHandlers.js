@@ -182,7 +182,7 @@ const useFormHandlers = () => {
 					origin: '',
 				})
 				setSelectedTemps([])
-				homeHandlers.handleClick()
+				homeHandlers.handleClick(event, true)
 				setReset(true)
 				alert(`The ${data.name} breed was created successfully`)
 			} catch (error) {

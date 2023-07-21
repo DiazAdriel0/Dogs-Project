@@ -10,6 +10,7 @@ import {
 	SELECTED_ORIGIN,
 	CURRENT_PAGE,
 	ORIGIN,
+	RESET_ALL_FILTERS,
 } from './actionTypes'
 
 // Endpoints
@@ -122,6 +123,15 @@ export const dogsFrom = typeOfId => {
 		return dispatch({
 			type: ORIGIN,
 			payload: typeOfId,
+		})
+	}
+}
+
+export const resetAllFilters = () => {
+	return dispatch => {
+		return dispatch({
+			type: RESET_ALL_FILTERS,
+			payload: [],
 		})
 	}
 }

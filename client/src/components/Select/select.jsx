@@ -52,10 +52,11 @@ const SelectMaster = props => {
 				></input>
 
 				<select
-					className={style.select}
+					className={inputValue.length ? style.selectVisible : style.select}
 					value={defaultValue}
 					onChange={handleChange}
 					name={name}
+					size={inputValue.length ? filteredOptions.length : 0}
 				>
 					<option
 						value={defaultValue}
@@ -66,13 +67,21 @@ const SelectMaster = props => {
 					</option>
 					{filteredOptions.length
 						? filteredOptions.map(option => (
-								<option key={option.label} value={option.value}>
+								<option
+									className={style.options}
+									key={option.label}
+									value={option.value}
+								>
 									{option.label}
 								</option>
 						  ))
 						: !inputValue &&
 						  options.map(option => (
-								<option key={option.label} value={option.value}>
+								<option
+									className={style.options}
+									key={option.label}
+									value={option.value}
+								>
 									{option.label}
 								</option>
 						  ))}

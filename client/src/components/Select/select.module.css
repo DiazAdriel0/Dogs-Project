@@ -34,15 +34,24 @@
 	top: 80%;
 	left: 0;
 	z-index: 10;
+	display: none;
+	padding: 6px;
+	background-color: #c9e4fd;
+}
+
+.selectVisible {
+	position: absolute;
+	width: 100%;
+	top: 80%;
+	left: 0;
+	z-index: 10;
+	display: block;
+	padding: 6px;
+	background-color: #c9e4fd;
 }
 
 .containerSelect:hover .select {
 	display: block;
-}
-
-.select {
-	display: none;
-	padding: 6px;
 }
 
 .input {
@@ -107,11 +116,7 @@
 }
 
 .selectPlaceholder {
-	color: #ccc;
-}
-
-.option {
-	margin: 5px;
+	color: #fff;
 }
 
 .sigleOption {

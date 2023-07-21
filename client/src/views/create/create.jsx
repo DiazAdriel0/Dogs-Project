@@ -62,7 +62,7 @@ const Create = () => {
 						<input
 							value={inputs.minImperialHeight}
 							name='minImperialHeight'
-							type='number'
+							type='text'
 							placeholder='Min Height (Inches)'
 							onChange={handleChange}
 						></input>
@@ -74,7 +74,7 @@ const Create = () => {
 						<input
 							value={inputs.maxImperialHeight}
 							name='maxImperialHeight'
-							type='number'
+							type='text'
 							placeholder='Max Height (Inches)'
 							onChange={handleChange}
 						></input>
@@ -96,7 +96,7 @@ const Create = () => {
 						<input
 							value={inputs.minImperialWeight}
 							name='minImperialWeight'
-							type='number'
+							type='text'
 							placeholder='Min Weight (Lbs)'
 							onChange={handleChange}
 						></input>
@@ -108,7 +108,7 @@ const Create = () => {
 						<input
 							value={inputs.maxImperialWeight}
 							name='maxImperialWeight'
-							type='number'
+							type='text'
 							placeholder='Max Weight (Lbs)'
 							onChange={handleChange}
 						></input>
@@ -130,7 +130,7 @@ const Create = () => {
 						<input
 							value={inputs.minLifeSpan}
 							name='minLifeSpan'
-							type='number'
+							type='text'
 							placeholder='Min Life Span (years)'
 							onChange={handleChange}
 						></input>
@@ -142,7 +142,7 @@ const Create = () => {
 						<input
 							value={inputs.maxLifeSpan}
 							name='maxLifeSpan'
-							type='number'
+							type='text'
 							placeholder='Max Life Span (years)'
 							onChange={handleChange}
 						></input>

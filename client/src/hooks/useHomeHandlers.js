@@ -9,6 +9,7 @@ import {
 	setSelectedOrigin,
 	setCurrentPage,
 	dogsFrom,
+	resetAllFilters,
 } from '../redux/actions/actions'
 import axios from 'axios'
 
@@ -107,8 +108,9 @@ const useHomeHandlers = () => {
 		}
 	}
 
-	const handleClick = () => {
-		dispatch(getAllDogs())
+	const handleClick = (event, create) => {
+		if (create) dispatch(getAllDogs())
+		else dispatch(resetAllFilters())
 		dispatch(setSelectedTemperaments([]))
 		setSelectedTempOptions([])
 		dispatch(setSelectedOrder([]))
@@ -132,7 +134,7 @@ const useHomeHandlers = () => {
 		const confirmation = confirm(
 			`Are you sure you want to delete the "${name}" breed?`,
 		)
-		confirmation && handleClick()
+		confirmation && handleClick(null, true)
 		confirmation && deleteDog(id)
 	}
 

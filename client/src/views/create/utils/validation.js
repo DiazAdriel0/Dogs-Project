@@ -23,7 +23,7 @@ const validation = inputs => {
 	)
 		errors = {
 			...errors,
-			imperialHeight: 'The height must be between 1 and 45',
+			imperialHeight: 'The height must be a integer between 1 and 45',
 		}
 	else if (Number(inputs.minImperialHeight) > Number(inputs.maxImperialHeight))
 		errors = {
@@ -39,7 +39,7 @@ const validation = inputs => {
 	)
 		errors = {
 			...errors,
-			imperialWeight: 'The weight must be between 1 and 350',
+			imperialWeight: 'The weight must be a integer between 1 and 350',
 		}
 	else if (Number(inputs.minImperialWeight) > Number(inputs.maxImperialWeight))
 		errors = {
@@ -55,7 +55,7 @@ const validation = inputs => {
 	)
 		errors = {
 			...errors,
-			lifeSpan: 'The life span must be between 1 and 25',
+			lifeSpan: 'The life span must be a integer between 1 and 25',
 		}
 	else if (Number(inputs.minLifeSpan) > Number(inputs.maxLifeSpan))
 		errors = {

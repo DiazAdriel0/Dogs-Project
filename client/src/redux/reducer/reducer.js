@@ -9,6 +9,7 @@ import {
 	SELECTED_ORIGIN,
 	CURRENT_PAGE,
 	ORIGIN,
+	RESET_ALL_FILTERS,
 } from '../actions/actionTypes'
 import { ascendingOrder, descendingOrder } from '../utils/orderFunctions'
 import { filterByName, filterMaster } from '../utils/filterFunctions'
@@ -17,6 +18,7 @@ const initialState = {
 	allDogs: [],
 	allDogsCopy: [],
 	allDogsFiltered: [],
+	allDogsWhenGet: [],
 
 	allTemperaments: [],
 	selectedTemperaments: [],
@@ -38,6 +40,19 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				allDogs: payload,
 				allDogsCopy: payload,
 				allDogsFiltered: payload,
+				allDogsWhenGet: [...payload],
+			}
+
+		case RESET_ALL_FILTERS:
+			return {
+				...state,
+				selectedTemperaments: payload,
+				selectedOrder: payload,
+				selectedOrigin: payload,
+				allDogs: [...state.allDogsWhenGet],
+				allDogsCopy: [...state.allDogsWhenGet],
+				allDogsFiltered: [...state.allDogsWhenGet],
+				currentPage: 1,
 			}
 
 		case GET_TEMPERAMENTS:
