@@ -33,7 +33,6 @@ const Home = () => {
 	}, [reset])
 
 	useEffect(() => {
-		console.log('SE MONTA EL COMPONENTE')
 		if (!allDogs.length) dispatch(getAllDogs())
 	}, [])
 
