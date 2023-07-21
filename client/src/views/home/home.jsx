@@ -9,6 +9,7 @@ import useHomeHandlers from '../../hooks/useHomeHandlers'
 import useOptions from '../../hooks/useOptions'
 import usePagination from '../../hooks/usePagination'
 import SelectMaster from '../../components/Select/select'
+import Loading from '../../components/loading/loading'
 
 const Home = () => {
 	// Global states
@@ -25,11 +26,14 @@ const Home = () => {
 
 	const [reset, setReset] = useState(false)
 
+	useEffect(() => {}, [])
+
 	useEffect(() => {
 		setReset(false)
 	}, [reset])
 
 	useEffect(() => {
+		console.log('SE MONTA EL COMPONENTE')
 		if (!allDogs.length) dispatch(getAllDogs())
 	}, [])
 
@@ -38,56 +42,62 @@ const Home = () => {
 	}
 
 	return (
-		<div className={style.containerHome}>
-			<div className={style.filters}>
-				<SearchBar />
+		<>
+			{!allDogs.length ? (
+				<Loading />
+			) : (
+				<div className={style.containerHome}>
+					<div className={style.filters}>
+						<SearchBar />
 
-				{!reset && (
-					<>
-						<SelectMaster
-							className={style.orderSelect}
-							options={options.orderOptions}
-							multi={false}
-							values={selectedOrder}
-							onChange={homeHandlers.handleOrderChange}
-							placeholder='Order Dogs'
-							reset={homeHandlers.reset}
-						/>
+						{!reset && (
+							<>
+								<SelectMaster
+									className={style.orderSelect}
+									options={options.orderOptions}
+									multi={false}
+									values={selectedOrder}
+									onChange={homeHandlers.handleOrderChange}
+									placeholder='Order Dogs'
+									reset={homeHandlers.reset}
+								/>
 
-						<SelectMaster
-							className={style.originSelect}
-							options={options.originOptions}
-							multi={false}
-							values={selectedOrigin}
-							onChange={homeHandlers.handleFromChange}
-							placeholder='Origin of Dogs'
-							reset={homeHandlers.reset}
-						/>
+								<SelectMaster
+									className={style.originSelect}
+									options={options.originOptions}
+									multi={false}
+									values={selectedOrigin}
+									onChange={homeHandlers.handleFromChange}
+									placeholder='Origin of Dogs'
+									reset={homeHandlers.reset}
+								/>
 
-						<SelectMaster
-							className={style.temperamentsSelect}
-							options={options.temperamentsOptions}
-							multi={true}
-							values={selectedTemperaments}
-							onChange={homeHandlers.handleTemperamentChange}
-							placeholder='Temperaments'
-							reset={homeHandlers.reset}
-						/>
-					</>
-				)}
+								<SelectMaster
+									className={style.temperamentsSelect}
+									options={options.temperamentsOptions}
+									multi={true}
+									values={selectedTemperaments}
+									onChange={homeHandlers.handleTemperamentChange}
+									placeholder='Temperaments'
+									reset={homeHandlers.reset}
+								/>
+							</>
+						)}
 
-				<button
-					className={style.resetButton}
-					onClick={homeHandlers.handleClick}
-				>
-					Reset All Filters
-				</button>
-			</div>
+						<button
+							className={style.resetButton}
+							onClick={homeHandlers.handleClick}
+						>
+							Reset All Filters
+						</button>
+					</div>
 
-			<Pagination />
-			<Cards allDogs={pagination.currentPageDogs} onReset={handleReset} />
-			<Pagination />
-		</div>
+					<Pagination />
+					<Cards allDogs={pagination.currentPageDogs} onReset={handleReset} />
+					<Pagination />
+				</div>
+			)}
+		</>
 	)
 }
 

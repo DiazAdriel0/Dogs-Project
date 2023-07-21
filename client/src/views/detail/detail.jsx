@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
 import style from './detail.module.css'
-import errorImage from './../../assets/dog-poop-icon.png'
 import SelectMaster from './../../components/Select/select'
 import useOptions from '../../hooks/useOptions'
 import useDetailFunctions from './utils/useDetailFunctions'
 import { Link } from 'react-router-dom'
+import Error from '../error/error'
 
 const Detail = () => {
 	const options = useOptions()
@@ -85,12 +85,7 @@ const Detail = () => {
 					</div>
 				</div>
 			)}
-			{error && (
-				<div>
-					<p>Error</p>
-					<img src={errorImage} alt='Error' />
-				</div>
-			)}
+			{error && <Error />}
 		</>
 	)
 }

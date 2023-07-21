@@ -1,0 +1,11 @@
+.containerLoading {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.loadingGif {
+	width: 40%;
+	margin: 6rem 0;
+}

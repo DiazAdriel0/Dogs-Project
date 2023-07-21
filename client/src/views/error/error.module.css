@@ -1,0 +1,21 @@
+.containerError {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 80%;
+	margin: auto;
+}
+
+.error {
+	margin-top: 5rem;
+}
+
+.errorImage {
+	margin-top: 50px;
+	width: 25%;
+}
+
+.errorText {
+	margin-top: 5rem;
+}
