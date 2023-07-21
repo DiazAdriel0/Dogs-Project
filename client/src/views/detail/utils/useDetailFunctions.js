@@ -53,7 +53,7 @@ const useDetailFunctions = () => {
 				setSelectedTemp([])
 				setDog({ ...dog, temperament: `${dog.temperament}, ${selectedTemp}` })
 				setAddTemperament(false)
-				homeHandlers.handleClick()
+				homeHandlers.handleClick(null, true)
 				alert('Temperament added successfully')
 			} catch (error) {
 				alert(error.message)

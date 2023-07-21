@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render } from '@testing-library/react'
@@ -23,5 +24,5 @@ test('renders content SelectMaster', () => {
 		/>,
 	)
 
-	expect(component.container).toHaveTextContent('This is a test')
+	component.getAllByText('This is a test')
 })
