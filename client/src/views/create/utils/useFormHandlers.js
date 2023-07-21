@@ -141,7 +141,10 @@ const useFormHandlers = () => {
 
 		const allNames = allDogs.map(dog => dog.name.toLowerCase())
 
-		if (areErrorsEmpty && !allNames.includes(name.toLowerCase())) {
+		if (allNames.includes(name.toLowerCase()))
+			return alert(`The ${name} breed already exists`)
+
+		if (areErrorsEmpty) {
 			try {
 				const postDog = {
 					name,
@@ -186,16 +189,15 @@ const useFormHandlers = () => {
 				setReset(true)
 				alert(`The ${data.name} breed was created successfully`)
 			} catch (error) {
-				alert(error.message)
+				error.response?.data?.error
+					? alert(error.response.data.error)
+					: alert(error.message)
 			}
 		} else {
-			if (!areErrorsEmpty) {
+			if (!areErrorsEmpty)
 				alert(
 					'Invalid entries for creation, make sure to fill in all fields and ensure they are error-free',
 				)
-			} else {
-				alert(`The ${name} breed already exists`)
-			}
 		}
 	}
 
