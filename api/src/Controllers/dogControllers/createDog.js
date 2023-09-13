@@ -9,8 +9,10 @@ const createDog = async (newDog, tempsArray) => {
     found && foundTemps.push(found);
   });
 
+  // Create new dog
   const createdDog = await Dog.create(newDog);
 
+  // Link dogs to temperaments through the intermediate table.
   await createdDog.setTemperaments(foundTemps);
 
   return createdDog;
