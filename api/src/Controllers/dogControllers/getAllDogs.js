@@ -5,10 +5,12 @@ const getAllDogs = async () => {
     const allDataBaseDogs = await Dog.findAll({
       include: Temperament,
     });
+
     const dogsWithTemperaments = allDataBaseDogs.map((dog) => {
       const temperamentsArray = dog.Temperaments.map(
         (temperament) => temperament.name
       );
+
       return {
         ...dog.dataValues,
         temperament: temperamentsArray.join(", "),
