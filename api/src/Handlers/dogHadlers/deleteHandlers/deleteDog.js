@@ -3,7 +3,9 @@ const deleteDogById = require("./../../../Controllers/dogControllers/deleteDogBy
 const deleteDog = async (req, res) => {
   const { idDog } = req.params;
   try {
+    // Delete breed
     const deletedDog = await deleteDogById(idDog);
+
     if (!deleteDog) throw new Error("Server error, dog could not be deleted");
 
     res.status(200).json(deletedDog);
