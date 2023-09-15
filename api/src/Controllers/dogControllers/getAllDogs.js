@@ -2,10 +2,12 @@ const { Dog, Temperament } = require("./../../DataBases/db");
 
 const getAllDogs = async () => {
   try {
+    // get all database dogs
     const allDataBaseDogs = await Dog.findAll({
       include: Temperament,
     });
 
+    // normalize dog's Temperaments array
     const dogsWithTemperaments = allDataBaseDogs.map((dog) => {
       const temperamentsArray = dog.Temperaments.map(
         (temperament) => temperament.name
