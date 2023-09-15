@@ -15,7 +15,7 @@ const basename = path.basename(__filename);
 
 const modelDefiners = [];
 
-// Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
+// Read all the files in the Models folder, require them, and add them to the modelDefiners array.
 fs.readdirSync(path.join(__dirname, "../models"))
   .filter(
     (file) =>
@@ -24,9 +24,9 @@ fs.readdirSync(path.join(__dirname, "../models"))
   .forEach((file) => {
     modelDefiners.push(require(path.join(__dirname, "../models", file)));
   });
-// Inyectamos la conexion (sequelize) a todos los modelos
+// Inject the connection (sequelize) into all the models
 modelDefiners.forEach((model) => model(sequelize));
-// Capitalizamos los nombres de los modelos ie: product => Product
+// Capitalize the name of the models ie: product => Product
 let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [
   entry[0][0].toUpperCase() + entry[0].slice(1),
@@ -36,6 +36,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const { Dog, Temperament } = sequelize.models;
 
+// Link the models through the intermiediate table
 Dog.belongsToMany(Temperament, { through: "DogTemperament" });
 Temperament.belongsToMany(Dog, { through: "DogTemperament" });
 
