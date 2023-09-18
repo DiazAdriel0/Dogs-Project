@@ -2,6 +2,7 @@ const createDog = require("./../../../Controllers/dogControllers/createDog");
 
 const postDog = async (req, res) => {
   try {
+    // extract properties of body
     const {
       name,
       image,
@@ -14,6 +15,7 @@ const postDog = async (req, res) => {
       origin,
     } = req.body;
 
+    // instance object to create new dog on DB
     const newDog = {
       name,
       image,
@@ -25,10 +27,12 @@ const postDog = async (req, res) => {
       origin,
     };
 
+    // normalize temperament property
     const tempsArray = await temperament
       .split(",")
       .map((temperament) => temperament.trim());
 
+    // create new dog
     const createdDog = await createDog(newDog, tempsArray);
 
     res.status(200).json(createdDog);
