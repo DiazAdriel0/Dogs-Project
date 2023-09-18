@@ -17,8 +17,11 @@ const getDogById = async (req, res) => {
       res.status(200).json(dog);
     } else {
       const { data } = await axios(`${URL}?api_key=${API_KEY}`);
+
       const dog = data.find((dog) => dog.id === Number(idDog));
+
       if (!dog) throw new Error("No breed matches the searched id");
+
       res.status(200).json(dog);
     }
   } catch (error) {
