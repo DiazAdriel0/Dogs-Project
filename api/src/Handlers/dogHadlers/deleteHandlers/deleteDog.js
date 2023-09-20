@@ -3,7 +3,7 @@ const deleteDogById = require("./../../../Controllers/dogControllers/deleteDogBy
 const deleteDog = async (req, res) => {
   const { idDog } = req.params;
   try {
-    // Delete breed
+    // Delete breed that mathces with id received by params
     const deletedDog = await deleteDogById(idDog);
 
     if (!deleteDog) throw new Error("Server error, dog could not be deleted");
