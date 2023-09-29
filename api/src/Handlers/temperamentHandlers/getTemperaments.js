@@ -17,6 +17,7 @@ const getTemperaments = async (req, res) => {
         temperaments.push(...dogTemp)
       }
     })
+    // delete repeated temperaments
     const temperamentSet = new Set(temperaments)
     const temperamentsArray = Array.from(temperamentSet)
     temperamentsArray.forEach(async (temperament) => {
