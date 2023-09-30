@@ -9,6 +9,7 @@ const getTemperaments = async (req, res) => {
     // get all dogs from API
     const { data } = await axios(`${URL}?api_key=${API_KEY}`)
     let temperaments = []
+    // normalize temperament property
     data.forEach((dog) => {
       if (dog.temperament) {
         const dogTemp = dog.temperament
