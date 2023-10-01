@@ -1,21 +1,22 @@
-const updateDogTemps = require("./../../../Controllers/dogControllers/updateDogTemps");
+const updateDogTemps = require('./../../../Controllers/dogControllers/updateDogTemps')
 
 const updateDog = async (req, res) => {
   try {
-    const { temperament } = req.body;
-    const { idDog } = req.params;
+    const { temperament } = req.body
+    const { idDog } = req.params
 
-    const updatedDog = await updateDogTemps(idDog, temperament);
+    const updatedDog = await updateDogTemps(idDog, temperament)
 
-    console.log(updatedDog);
     if (!Object.keys(updatedDog).length)
+      // if updatedDog is not empty
       throw new Error(
-        "Server error, dog could not be connected with the temperament"
-      );
-    res.status(200).json(updatedDog);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
+        'Server error, dog could not be connected with the temperament'
+      )
 
-module.exports = updateDog;
+    res.status(200).json(updatedDog)
+  } catch (error) {
+    res.status(400).json({ error: error.message })
+  }
+}
+
+module.exports = updateDog

@@ -8,7 +8,9 @@ const getTemperaments = async (req, res) => {
   try {
     // get all dogs from API
     const { data } = await axios(`${URL}?api_key=${API_KEY}`)
+
     let temperaments = []
+
     // normalize temperament property
     data.forEach((dog) => {
       if (dog.temperament) {
@@ -18,12 +20,15 @@ const getTemperaments = async (req, res) => {
         temperaments.push(...dogTemp)
       }
     })
+
     // delete repeated temperaments
     const temperamentSet = new Set(temperaments)
     const temperamentsArray = Array.from(temperamentSet)
+
     temperamentsArray.forEach(async (temperament) => {
       await findOrCreateTemperament(temperament)
     })
+
     res.status(200).json(temperamentsArray)
   } catch (error) {
     res.status(400).json({ error: error.message })
