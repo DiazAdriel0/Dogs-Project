@@ -10,7 +10,9 @@ const SearchBar = () => {
 
 	const handleClick = event => {
 		event.preventDefault()
+		// search dogs on the global state
 		dispatch(searchDogsByName(search))
+		// reset search input
 		setSearch('')
 	}
 
