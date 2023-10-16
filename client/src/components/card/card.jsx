@@ -5,6 +5,7 @@ import useHomeHandlers from './../../hooks/useHomeHandlers'
 const Card = props => {
 	const { dog, onReset } = props
 	const { handleDelete } = useHomeHandlers()
+
 	return (
 		<div className={style.container}>
 			<div className={style.card}>
@@ -22,6 +23,7 @@ const Card = props => {
 						</div>
 					</div>
 				</div>
+
 				<div className={style.cardBody}>
 					<div>
 						<div className={style.animalInfo}>
@@ -37,11 +39,13 @@ const Card = props => {
 								</li>
 							</ul>
 						</div>
+
 						<div className={style.animalDescription}>
 							<h4>Temperaments: </h4>
 							<p>{dog.temperament}</p>
 						</div>
 					</div>
+
 					{typeof dog.id !== 'number' && (
 						<div className={style.deleteButtonContainer}>
 							<button
