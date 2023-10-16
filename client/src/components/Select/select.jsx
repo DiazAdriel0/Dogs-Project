@@ -42,6 +42,7 @@ const SelectMaster = props => {
 								</span>
 							</div>
 					  )}
+
 				<input
 					type='text'
 					disabled={!multi}
@@ -49,7 +50,7 @@ const SelectMaster = props => {
 					className={style.input}
 					value={inputValue}
 					onChange={event => handleInputChange(event)}
-				></input>
+				/>
 
 				<select
 					className={inputValue.length ? style.selectVisible : style.select}
@@ -65,6 +66,7 @@ const SelectMaster = props => {
 					>
 						Select {placeholder}
 					</option>
+
 					{filteredOptions.length
 						? filteredOptions.map(option => (
 								<option
