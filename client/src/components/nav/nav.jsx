@@ -9,9 +9,11 @@ const Nav = () => {
 				<Link className={style.link} to='/home'>
 					<img className={style.homeLogo} src={homeLogo} alt='home logo'></img>
 				</Link>
+
 				<Link className={style.link} to='/create'>
 					CREATE
 				</Link>
+
 				<Link className={style.link} to='/about'>
 					ABOUT ME
 				</Link>
